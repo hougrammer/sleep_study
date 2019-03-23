@@ -1,36 +1,39 @@
-"Timestamp","Email.Address","Full.Name","Age","Gender","What.time.do.you.usually.go.to.bed.at.night.","What.time.do.you.usually.get.out.of.bed.in.the.morning.","On.average..about.how.many.caffeinated.beverages.do.you.drink.per.day.","Do.you.workout.1.hr.before.going.to.bed.","On.average..about.how.many.hours.do.you.use.electronic.devices.with.a.back.lit.screen.per.day.","How.many.minutes.prior.to.bed.do.you.usually.stop.using.any.electronic.devices.","Do.you.watch.movies.videos.or.play.video.games.before.going.to.bed.","Do.you.browse.news.sites.or.social.networking.sites.before.going.to.bed.","What.bed.size.do.you.have.","Do.you.share.your.bed.with.a.partner.","no_screen_first"
-"3/9/2019 11:58:25","danielle.adler@berkeley.edu","Danielle Adler",NA,"","12:30:00 AM","7:30:00 AM",0.5,"No",9,"15 min","None","Yes","Queen","Yes",0
-"3/9/2019 11:59:54","lance.miles@berkeley.edu","Lance Leo Miles",NA,"","11:30:00 PM","7:30:00 AM",3,"No",12,"0","Both","Yes","Twin","Yes",0
-"3/9/2019 12:30:30","vijjus@berkeley.edu","Vijay Singh",NA,"","11:30:00 PM","7:00:00 AM",2,"No",2,"30 min","Movies/Videos","No","Queen","Yes",1
-"3/9/2019 12:55:23","danrasband@berkeley.edu","Dan Rasband",NA,"","12:00:00 AM","7:30:00 AM",0,"No",12,"15 min","None","Maybe","King","Yes",1
-"3/10/2019 14:26:25","vidya_ramamoorthy@berkeley.edu","Srividya Ramamoorthy",NA,"","2:00:00 AM","8:00:00 AM",2,"No",6,"15 min","Movies/Videos","Maybe","Twin","No",1
-"3/10/2019 17:56:13","ian.nikolai.crosson@gmail.com","Ian Crosson",NA,"","12:00:00 AM","9:00:00 AM",0,"No",8,"0","Both","Yes","Queen","No",0
-"3/10/2019 17:56:18","sarah.kahermanes@gmail.com","Sarah Kahermanes",NA,"","12:00:00 AM","9:00:00 AM",2,"No",16,"30 min","Both","Yes","Queen","No",1
-"3/10/2019 18:48:44","vincent.newell@gmail.com","Vincent Newell",29,"Male","11:00:00 PM","6:35:00 AM",2,"No",14,"15 min","Both","Yes","Queen","No",0
-"3/11/2019 8:37:37","sm.ferro54@berkeley.edu","Sergio Ferro",29,"Male","10:30:00 PM","7:00:00 AM",2,"No",10,"60 min","None","No","Queen","No",0
-"3/11/2019 8:56:43","azembala@gmail.com","Andrew Zembala",29,"Male","11:30:00 PM","7:30:00 AM",3,"No",10,"15 min","Both","Yes","Queen","Maybe",0
-"3/11/2019 9:54:09","rebeccalrowan@gmail.com","Rebecca Rowan",27,"Female","10:00:00 PM","5:00:00 AM",3,"No",6,"0","Movies/Videos","Yes","Queen","No",1
-"3/11/2019 12:07:28","stangco@gmail.com","Sean",30,"Male","11:00:00 PM","8:00:00 AM",0.3,"No",4,"15 min","Movies/Videos","Yes","Queen","Yes",0
-"3/11/2019 13:51:26","vignesh.balki@gmail.com","vignesh balakrishnan",30,"Male","12:00:00 PM","8:00:00 AM",0,"No",11,"15 min","Both","Yes","California King","Yes",1
-"3/11/2019 16:54:37","bteeyoung@gmail.com","Brenda Young",27,"Female","2:00:00 AM","8:30:00 AM",0,"No",12,"0","None","Yes","Queen","Maybe",0
-"3/11/2019 23:38:46","narenkris@gmail.com","Naren Krishna Nanamadri ",31,"Male","1:00:00 AM","7:30:00 AM",2,"No",4,"0","Both","Yes","King","Yes",0
-"3/12/2019 0:07:43","lynne.lu88@gmail.com","Lynne Lu",30,"Female","1:00:00 AM","8:00:00 AM",1,"Yes",3,"15 min","Movies/Videos","Yes","Queen","No",0
-"3/12/2019 10:34:48","jrtuenge@berkeley.edu","Jason Tuenge",42,"Male","11:30:00 PM","7:00:00 AM",2,"No",12,"30 min","None","No","Queen","No",0
-"3/12/2019 10:45:01","lucymxie@gmail.com","Lucy Xie",25,"Female","10:30:00 PM","6:15:00 AM",2,"No",3,"15 min","Movies/Videos","Yes","King","Yes",1
-"3/13/2019 0:37:51","christopherehernandez88@gmail.com","Christopher Hernandez ",30,"Male","1:00:00 AM","9:00:00 AM",2,"No",5,"0","Movies/Videos","Yes","Queen","Yes",1
-"3/13/2019 10:32:33","radhaayyappan@gmail.com","Radha Ayyappan",35,"Female","10:30:00 PM","6:45:00 AM",0,"No",3,"15 min","None","Yes","King","Yes",0
-"3/14/2019 13:25:40","alexdauenhauer17@gmail.com","Alex Dauenhauer",32,"Male","10:00:00 PM","5:30:00 AM",2,"No",12,"30 min","Movies/Videos","Maybe","King","Yes",0
-"3/14/2019 14:25:52","subharavi22@gmail.com","Subha sanjeevi",36,"Female","10:30:00 PM","6:30:00 AM",2,"No",4,"15 min","Movies/Videos","Yes","Queen","No",1
-"3/14/2019 16:33:10","jessicaeconomou@gmail.com","Jessica Economou",27,"Female","11:00:00 PM","7:00:00 AM",2,"No",12,"0","Movies/Videos","Yes","Queen","Yes",1
-"3/15/2019 0:01:06","ritesh.biltheria@gmail.com","Ritesh Biltheria",42,"Male","12:00:00 AM","7:00:00 AM",3,"No",4,"15 min","None","Yes","California King","Yes",1
-"3/15/2019 10:43:24","apaquin@datascience.berkeley.edu","Alyssa Paquin",26,"Female","11:00:00 PM","7:00:00 AM",1,"No",9,"0","None","Yes","Queen","No",1
-"3/17/2019 11:37:38","harikun@gmail.com","Hari Kumar",42,"Male","10:00:00 PM","5:30:00 AM",1,"No",3,"0","Both","Maybe","King","Yes",1
-"3/17/2019 11:55:12","iyappan.ram@gmail.com","Iyappan Ramachandran",40,"Male","11:00:00 PM","7:00:00 AM",2,"No",3,"60 min","Movies/Videos","No","King","Yes",1
-"3/17/2019 19:54:30","krishnamurthy.srini@gmail.com","Srini Krishnamurthy",61,"Male","9:00:00 PM","5:00:00 AM",1,"No",8,"0","None","Yes","Queen","Yes",0
-"3/17/2019 21:01:46","rabaprakash@gmail.com","Prakash Ramadass",38,"Male","11:00:00 PM","7:00:00 AM",1,"Yes",3,"0","Movies/Videos","Yes","California King","Yes",1
-"3/17/2019 21:30:05","haisuganya@gmail.com","Suganya",40,"Female","10:30:00 PM","6:30:00 AM",0,"No",9,"0","Both","Yes","California King","Yes",0
-"3/18/2019 0:46:14","sethuramang@yahoo.com","Sethuraman Gurumoorthy",43,"Male","11:30:00 PM","5:30:00 AM",1,"No",2,"","","","","",1
-"3/18/2019 9:04:53","rsreenu2000@gmail.com","Sreenivasulu Rayanki",43,"Male","10:30:00 PM","6:30:00 AM",0,"No",3,"30 min","None","Maybe","Queen","Yes",1
-"3/18/2019 10:01:08","nellaiss@gmail.com","nellaiappan",39,"Male","11:00:00 PM","6:30:00 PM",2,"No",1,"15 min","Movies/Videos","Yes","Queen","",0
-"3/18/2019 11:06:58","soumya.nagaraja@gmail.com","Soumya",37,"Female","10:00:00 PM","5:00:00 AM",2,"Yes",9,"15 min","Both","Yes","King","Yes",1
-"3/18/2019 15:01:35","mahadevan0509@gmail.com","Mahadevan",35,"Male","11:00:00 PM","7:00:00 AM",1,"No",10,"15 min","Movies/Videos","Yes","King","Yes",0
+Timestamp,Email Address,Full Name,Age,Gender,What time do you usually go to bed at night?,What time do you usually get out of bed in the morning?,"On average, about how many caffeinated beverages do you drink per day?",Do you workout 1 hr before going to bed?,"On average, about how many hours do you use electronic devices with a back-lit screen per day?",How many minutes prior to bed do you usually stop using any electronic devices?  ,Do you watch movies/videos or play video games before going to bed?,Do you browse news sites or social networking sites before going to bed?,What bed size do you have?,Do you share your bed with a partner?
+3/9/2019 11:58:25,danielle.adler@berkeley.edu,Danielle Adler,,,12:30:00 AM,7:30:00 AM,0.5,No,9,15 min,None,Yes,Queen,Yes
+3/9/2019 11:59:54,lance.miles@berkeley.edu,Lance Leo Miles,,,11:30:00 PM,7:30:00 AM,3,No,12,0,Both,Yes,Twin,Yes
+3/9/2019 12:30:30,vijjus@berkeley.edu,Vijay Singh,,,11:30:00 PM,7:00:00 AM,2,No,2,30 min,Movies/Videos,No,Queen,Yes
+3/9/2019 12:55:23,danrasband@berkeley.edu,Dan Rasband,,,12:00:00 AM,7:30:00 AM,0,No,12,15 min,None,Maybe,King,Yes
+3/10/2019 14:26:25,vidya_ramamoorthy@berkeley.edu,Srividya Ramamoorthy,,,2:00:00 AM,8:00:00 AM,2,No,6,15 min,Movies/Videos,Maybe,Twin,No
+3/10/2019 17:56:13,ian.nikolai.crosson@gmail.com,Ian Crosson,,,12:00:00 AM,9:00:00 AM,0,No,8,0,Both,Yes,Queen,No
+3/10/2019 17:56:18,sarah.kahermanes@gmail.com,Sarah Kahermanes,,,12:00:00 AM,9:00:00 AM,2,No,16,30 min,Both,Yes,Queen,No
+3/10/2019 18:48:44,vincent.newell@gmail.com,Vincent Newell,29,Male,11:00:00 PM,6:35:00 AM,2,No,14,15 min,Both,Yes,Queen,No
+3/11/2019 8:37:37,sm.ferro54@berkeley.edu,Sergio Ferro,29,Male,10:30:00 PM,7:00:00 AM,2,No,10,60 min,None,No,Queen,No
+3/11/2019 8:56:43,azembala@gmail.com,Andrew Zembala,29,Male,11:30:00 PM,7:30:00 AM,3,No,10,15 min,Both,Yes,Queen,Maybe
+3/11/2019 9:54:09,rebeccalrowan@gmail.com,Rebecca Rowan,27,Female,10:00:00 PM,5:00:00 AM,3,No,6,0,Movies/Videos,Yes,Queen,No
+3/11/2019 12:07:28,stangco@gmail.com,Sean,30,Male,11:00:00 PM,8:00:00 AM,0.3,No,4,15 min,Movies/Videos,Yes,Queen,Yes
+3/11/2019 13:51:26,vignesh.balki@gmail.com,vignesh balakrishnan,30,Male,12:00:00 PM,8:00:00 AM,0,No,11,15 min,Both,Yes,California King,Yes
+3/11/2019 16:54:37,bteeyoung@gmail.com,Brenda Young,27,Female,2:00:00 AM,8:30:00 AM,0,No,12,0,None,Yes,Queen,Maybe
+3/11/2019 23:38:46,narenkris@gmail.com,Naren Krishna Nanamadri ,31,Male,1:00:00 AM,7:30:00 AM,2,No,4,0,Both,Yes,King,Yes
+3/12/2019 0:07:43,lynne.lu88@gmail.com,Lynne Lu,30,Female,1:00:00 AM,8:00:00 AM,1,Yes,3,15 min,Movies/Videos,Yes,Queen,No
+3/12/2019 10:34:48,jrtuenge@berkeley.edu,Jason Tuenge,42,Male,11:30:00 PM,7:00:00 AM,2,No,12,30 min,None,No,Queen,No
+3/12/2019 10:45:01,lucymxie@gmail.com,Lucy Xie,25,Female,10:30:00 PM,6:15:00 AM,2,No,3,15 min,Movies/Videos,Yes,King,Yes
+3/13/2019 0:37:51,christopherehernandez88@gmail.com,Christopher Hernandez ,30,Male,1:00:00 AM,9:00:00 AM,2,No,5,0,Movies/Videos,Yes,Queen,Yes
+3/13/2019 10:32:33,radhaayyappan@gmail.com,Radha Ayyappan,35,Female,10:30:00 PM,6:45:00 AM,0,No,3,15 min,None,Yes,King,Yes
+3/14/2019 13:25:40,alexdauenhauer17@gmail.com,Alex Dauenhauer,32,Male,10:00:00 PM,5:30:00 AM,2,No,12,30 min,Movies/Videos,Maybe,King,Yes
+3/14/2019 14:25:52,subharavi22@gmail.com,Subha sanjeevi,36,Female,10:30:00 PM,6:30:00 AM,2,No,4,15 min,Movies/Videos,Yes,Queen,No
+3/14/2019 16:33:10,jessicaeconomou@gmail.com,Jessica Economou,27,Female,11:00:00 PM,7:00:00 AM,2,No,12,0,Movies/Videos,Yes,Queen,Yes
+3/15/2019 0:01:06,ritesh.biltheria@gmail.com,Ritesh Biltheria,42,Male,12:00:00 AM,7:00:00 AM,3,No,4,15 min,None,Yes,California King,Yes
+3/15/2019 10:43:24,apaquin@datascience.berkeley.edu,Alyssa Paquin,26,Female,11:00:00 PM,7:00:00 AM,1,No,9,0,None,Yes,Queen,No
+3/17/2019 11:37:38,harikun@gmail.com,Hari Kumar,42,Male,10:00:00 PM,5:30:00 AM,1,No,3,0,Both,Maybe,King,Yes
+3/17/2019 11:55:12,iyappan.ram@gmail.com,Iyappan Ramachandran,40,Male,11:00:00 PM,7:00:00 AM,2,No,3,60 min,Movies/Videos,No,King,Yes
+3/17/2019 19:54:30,krishnamurthy.srini@gmail.com,Srini Krishnamurthy,61,Male,9:00:00 PM,5:00:00 AM,1,No,8,0,None,Yes,Queen,Yes
+3/17/2019 21:01:46,rabaprakash@gmail.com,Prakash Ramadass,38,Male,11:00:00 PM,7:00:00 AM,1,Yes,3,0,Movies/Videos,Yes,California King,Yes
+3/17/2019 21:30:05,haisuganya@gmail.com,Suganya,40,Female,10:30:00 PM,6:30:00 AM,0,No,9,0,Both,Yes,California King,Yes
+3/18/2019 0:46:14,sethuramang@yahoo.com,Sethuraman Gurumoorthy,43,Male,11:30:00 PM,5:30:00 AM,1,No,2,,,,,
+3/18/2019 9:04:53,rsreenu2000@gmail.com,Sreenivasulu Rayanki,43,Male,10:30:00 PM,6:30:00 AM,0,No,3,30 min,None,Maybe,Queen,Yes
+3/18/2019 10:01:08,nellaiss@gmail.com,nellaiappan,39,Male,11:00:00 PM,6:30:00 PM,2,No,1,15 min,Movies/Videos,Yes,Queen,
+3/18/2019 11:06:58,soumya.nagaraja@gmail.com,Soumya,37,Female,10:00:00 PM,5:00:00 AM,2,Yes,9,15 min,Both,Yes,King,Yes
+3/18/2019 15:01:35,mahadevan0509@gmail.com,Mahadevan,35,Male,11:00:00 PM,7:00:00 AM,1,No,10,15 min,Movies/Videos,Yes,King,Yes
+3/18/2019 22:08:56,ahsqamar@berkeley.edu,Ahsen Qamar,29,Male,10:00:00 PM,8:30:00 AM,0,No,7,15 min,Movies/Videos,Yes,Queen,No
+3/18/2019 22:08:57,david.m.hou@gmail.com,David Hou,27,Male,12:00:00 AM,8:00:00 AM,0,No,8,45 min,None,No,Queen,No
+3/18/2019 22:34:11,ravi_ayyappan@berkeley.edu,Ravi Ayyappan,39,Male,10:00:00 PM,6:00:00 AM,0,No,2,0,None,Yes,Queen,Yes
