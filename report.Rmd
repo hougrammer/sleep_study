@@ -1,0 +1,35 @@
+---
+title: "W241 Final Report"
+author: "David Hou"
+date: "April 4, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+The importance of good sleep habits is emphasized quite often in contemporary advice.  One aspect of good sleep hygiene is the avoidance of electronic devices with backlit screens prior to bed.  The light from these screens causes the brain to stay under the assumption of daytime, inhibiting the production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed.  Due to our limited expertise and resources for studying sleep science, we will perform the measaurement using a mobile app.
+
+## Experiment Design
+
+The app used is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles overnight.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  One of these statistics is a "Sleep Quality" number, which is the principle outcome variable in this experiment.  According to the *Sleep Cycle* website, these 4 factors go into calculating Sleep Quality:
+
+1. Amount of time spent in bed.
+2. Amount of time spent in deep sleep.
+3. Consistency of the sleep.
+4. Amount of times where the app registered you as fully awake.
+
+The experiment took place over two weeks, from March 23 to April 6 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demogrphic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.  All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix).
+
+Subjects were assigned randomly to two groups, with group 1 receiving treatment (screen-time before bed) during the first week and group 2 receiving control (no screen-time before bed).  After the first week, subjects were instructed to swap to the opposite activity of what they were assigned to initially.  The swapping design allows us to perform within-subject comparisons while also leaving time for treatment effects to manifest themselves.  With the group that received treatment first, we are also able to perform some analysis on persistence effects.  Note that subjects were not informed of the instruction swap ahead of time, so we do not expect any anticipation effects.
+
+The nature of experiment requires effort from subjects in both treatment and control.  That is, for people who normally use electronic devices before bed, the request to refrain from useage constitutes a significant change in pre-sleep ritual; for people who normally avoid electronics before bed, the opposite is true.  Therefore, we are concerned with two-sided non-compliance, which is especially difficult to measure in this experiment because people are unlikely to honestly report when they have deviated from our instructions.  To help combat this somewhat, we offered subjects some small monetary compensation and emphasized prioritization of honesty of compliance in reporting data.  Even so, we can never be sure of whether subjects followed instructions.
+
+### Experiment Deviations
+
+Between the closing the sign-up survey, we asked all respondents to begin using the app in order to establish baseline data and help the app calibrate (the website claims that the app becomes more accurate over time).  Sleep habits during this baseline usage were not closely controlled or monitored, as each subject signed up for the experiment at different dates.  However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export.  At this time, we learned that Android users could not perform the export due to missing functionality in the app.  As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
+
+After closing the sign-up survey, we decided to also included ourselves as subjects in the experiment.  This was to slightly raise the number of subjects and out of curiosity for the effects on ourselves.  Though we were not aware of our own randomization a priori, we obviously had more knowledge of the experiment than other subjects, so we will analyze our own data with special care.
