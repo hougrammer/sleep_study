@@ -1,12 +1,18 @@
 ---
 title: "W241 Final Report"
-author: "David Hou"
-date: "April 4, 2019"
-output: pdf_document
+author: "David Hou, Ravi Ayyappan, Ahsen Qamar"
+date: "April 2019"
+output: 
+  pdf_document: 
+    keep_tex: yes
+urlcolor: blue
+linkcolor: blue
+header-includes:
+  \usepackage{float}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = F, fig.pos = 'H')
 ```
 
 ## Introduction
@@ -15,7 +21,13 @@ The importance of good sleep habits is emphasized quite often in contemporary ad
 
 ## Experiment Design
 
-The app used is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles overnight.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  One of these statistics is a "Sleep Quality" number, which is the principle outcome variable in this experiment.  According to the *Sleep Cycle* website, these four factors go into calculating Sleep Quality:
+The app used is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles overnight.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  Figure \ref{fig:example_night} shows an example of the output from one night's data.
+
+```{r example_night, out.width='25%', fig.align='center', fig.cap='Example night'}
+knitr::include_graphics('img/example_night.PNG')
+```
+
+One of these statistics is a "Sleep Quality" number, which is the principle outcome variable in this experiment.  According to the *Sleep Cycle* website, these four factors go into calculating Sleep Quality:
 
 1. Amount of time spent in bed.
 2. Amount of time spent in deep sleep.
