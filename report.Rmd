@@ -49,3 +49,9 @@ The nature of experiment requires effort from subjects in both treatment and con
 Between the closing the sign-up survey, we asked all respondents to begin using the app in order to establish baseline data and help the app calibrate (the website claims that the app becomes more accurate over time).  Sleep habits during this baseline usage were not closely controlled or monitored, as each subject signed up for the experiment at different dates.  However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export.  At this time, we learned that Android users could not perform the export due to missing functionality in the app.  As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
 
 After closing the sign-up survey, we decided to also included ourselves as subjects in the experiment.  This was to slightly raise the number of subjects and out of curiosity for the effects on ourselves.  Though we were not aware of our own randomization a priori, we obviously had more knowledge of the experiment than other subjects, so we will analyze our own data with special care.
+
+## Results
+
+### Data Cleaning
+
+We made as little modification to the raw data as possible, but a few exceptions exist.  We decided to omit entries for which the subject slept for a duration shorter than one hour.  On case by case basis, we determined that these entries were caused by improper usage of the app.  There were several entries where the user had two entries in one night, separated by some period of awakeness.  In these cases, one or both of the periods of sleep were also very short.  However, none of them fell under the one hour threshold for omission.

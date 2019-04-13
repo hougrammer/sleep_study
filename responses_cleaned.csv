@@ -1,0 +1,39 @@
+email,name,age,gender,bed_time,bed_time_24,rise_time,rise_time_24,caffeine,workout_1hr_before_bed,electronics_daily_hours,electronics_stop_minutes_before_bed,movies_video_games,news_social_networking,bed_size,bed_share
+ahsqamar@berkeley.edu,Ahsen Qamar,29,Male,10:00:00 PM,22.00,8:30:00 AM,8.50,0,No,7,15,Movies/Videos,Yes,Queen,No
+alexdauenhauer17@gmail.com,Alex Dauenhauer,32,Male,10:00:00 PM,22.00,5:30:00 AM,5.50,2,No,12,30,Movies/Videos,Maybe,King,Yes
+apaquin@datascience.berkeley.edu,Alyssa Paquin,26,Female,11:00:00 PM,23.00,7:00:00 AM,7.00,1,No,9,0,None,Yes,Queen,No
+azembala@gmail.com,Andrew Zembala,29,Male,11:30:00 PM,23.50,7:30:00 AM,7.50,3,No,10,15,Both,Yes,Queen,Maybe
+bteeyoung@gmail.com,Brenda Young,27,Female,2:00:00 AM,2.00,8:30:00 AM,8.50,0,No,12,0,None,Yes,Queen,Maybe
+christopherehernandez88@gmail.com,Christopher Hernandez ,30,Male,1:00:00 AM,1.00,9:00:00 AM,9.00,2,No,5,0,Movies/Videos,Yes,Queen,Yes
+danielle.adler@berkeley.edu,Danielle Adler,,Female,12:30:00 AM,0.50,7:30:00 AM,7.50,0.5,No,9,15,None,Yes,Queen,Yes
+danrasband@berkeley.edu,Dan Rasband,35,Male,12:00:00 AM,0.00,7:30:00 AM,7.50,0,No,12,15,None,Maybe,King,Yes
+david.m.hou@gmail.com,David Hou,27,Male,12:00:00 AM,0.00,8:00:00 AM,8.00,0,No,8,45,None,No,Queen,No
+haisuganya@gmail.com,Suganya,40,Female,10:30:00 PM,22.50,6:30:00 AM,6.50,0,No,9,0,Both,Yes,California King,Yes
+harikun@gmail.com,Hari Kumar,42,Male,10:00:00 PM,22.00,5:30:00 AM,5.50,1,No,3,0,Both,Maybe,King,Yes
+ian.nikolai.crosson@gmail.com,Ian Crosson,27,Male,12:00:00 AM,0.00,9:00:00 AM,9.00,0,No,8,0,Both,Yes,Queen,No
+iyappan.ram@gmail.com,Iyappan Ramachandran,40,Male,11:00:00 PM,23.00,7:00:00 AM,7.00,2,No,3,60,Movies/Videos,No,King,Yes
+jessicaeconomou@gmail.com,Jessica Economou,27,Female,11:00:00 PM,23.00,7:00:00 AM,7.00,2,No,12,0,Movies/Videos,Yes,Queen,Yes
+jrtuenge@berkeley.edu,Jason Tuenge,42,Male,11:30:00 PM,23.50,7:00:00 AM,7.00,2,No,12,30,None,No,Queen,No
+krishnamurthy.srini@gmail.com,Srini Krishnamurthy,61,Male,9:00:00 PM,21.00,5:00:00 AM,5.00,1,No,8,0,None,Yes,Queen,Yes
+lance.miles@berkeley.edu,Lance Leo Miles,27,Male,11:30:00 PM,23.50,7:30:00 AM,5.50,3,No,12,0,Both,Yes,Twin,Yes
+lucymxie@gmail.com,Lucy Xie,25,Female,10:30:00 PM,22.50,6:15:00 AM,6.25,2,No,3,15,Movies/Videos,Yes,King,Yes
+lynne.lu88@gmail.com,Lynne Lu,30,Female,1:00:00 AM,1.00,8:00:00 AM,8.00,1,Yes,3,15,Movies/Videos,Yes,Queen,No
+mahadevan0509@gmail.com,Mahadevan,35,Male,11:00:00 PM,23.00,7:00:00 AM,7.00,1,No,10,15,Movies/Videos,Yes,King,Yes
+narenkris@gmail.com,Naren Krishna Nanamadri ,31,Male,1:00:00 AM,1.00,7:30:00 AM,7.50,2,No,4,0,Both,Yes,King,Yes
+nellaiss@gmail.com,nellaiappan,39,Male,11:00:00 PM,23.00,6:30:00 PM,6.50,2,No,1,15,Movies/Videos,Yes,Queen,
+rabaprakash@gmail.com,Prakash Ramadass,38,Male,11:00:00 PM,23.00,7:00:00 AM,7.00,1,Yes,3,0,Movies/Videos,Yes,California King,Yes
+radhaayyappan@gmail.com,Radha Ayyappan,35,Female,10:30:00 PM,22.50,6:45:00 AM,6.75,0,No,3,15,None,Yes,King,Yes
+ravi_ayyappan@berkeley.edu,Ravi Ayyappan,39,Male,10:00:00 PM,22.00,6:00:00 AM,6.00,0,No,2,0,None,Yes,Queen,Yes
+rebeccalrowan@gmail.com,Rebecca Rowan,27,Female,10:00:00 PM,22.00,5:00:00 AM,5.00,3,No,6,0,Movies/Videos,Yes,Queen,No
+ritesh.biltheria@gmail.com,Ritesh Biltheria,42,Male,12:00:00 AM,0.00,7:00:00 AM,7.00,3,No,4,15,None,Yes,California King,Yes
+rsreenu2000@gmail.com,Sreenivasulu Rayanki,43,Male,10:30:00 PM,22.50,6:30:00 AM,6.50,0,No,3,30,None,Maybe,Queen,Yes
+sarah.kahermanes@gmail.com,Sarah Kahermanes,29,Female,12:00:00 AM,0.00,9:00:00 AM,9.00,2,No,16,30,Both,Yes,Queen,No
+sethuramang@yahoo.com,Sethuraman Gurumoorthy,43,Male,11:30:00 PM,23.50,5:30:00 AM,5.50,1,No,2,,,,,
+sm.ferro54@berkeley.edu,Sergio Ferro,29,Male,10:30:00 PM,22.50,7:00:00 AM,7.00,2,No,10,60,None,No,Queen,No
+soumya.nagaraja@gmail.com,Soumya,37,Female,10:00:00 PM,22.00,5:00:00 AM,5.00,2,Yes,9,15,Both,Yes,King,Yes
+stangco@gmail.com,Sean,30,Male,11:00:00 PM,23.00,8:00:00 AM,8.00,0.3,No,4,15,Movies/Videos,Yes,Queen,Yes
+subharavi22@gmail.com,Subha sanjeevi,36,Female,10:30:00 PM,22.50,6:30:00 AM,6.50,2,No,4,15,Movies/Videos,Yes,Queen,No
+vidya_ramamoorthy@berkeley.edu,Srividya Ramamoorthy,,Female,2:00:00 AM,2.00,8:00:00 AM,8.00,2,No,6,15,Movies/Videos,Maybe,Twin,No
+vignesh.balki@gmail.com,vignesh balakrishnan,30,Male,12:00:00 PM,0.00,8:00:00 AM,8.00,0,No,11,15,Both,Yes,California King,Yes
+vijjus@berkeley.edu,Vijay Singh,44,Male,11:30:00 PM,21.50,7:00:00 AM,7.00,2,No,2,30,Movies/Videos,No,Queen,Yes
+vincent.newell@gmail.com,Vincent Newell,29,Male,11:00:00 PM,21.00,6:35:00 AM,6.58,2,No,14,15,Both,Yes,Queen,No
