@@ -13,6 +13,9 @@ header-includes:
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = F, fig.pos = 'H')
+library(data.table)
+library(ggplot2)
+library(stargazer)
 ```
 
 ## Introduction
@@ -55,3 +58,23 @@ After closing the sign-up survey, we decided to also included ourselves as subje
 ### Data Cleaning
 
 We made as little modification to the raw data as possible, but a few exceptions exist.  We decided to omit entries for which the subject slept for a duration shorter than one hour.  On case by case basis, we determined that these entries were caused by improper usage of the app.  There were several entries where the user had two entries in one night, separated by some period of awakeness.  In these cases, one or both of the periods of sleep were also very short.  However, none of them fell under the one hour threshold for omission.
+
+```{r}
+df = data.table(read.csv('data/cleaned.csv'))
+df[, treat := as.factor(treat)]
+m1 = df[treat %in% c(0,1), lm(quality ~ treat)]
+m2 = df[treat %in% c(0,1), lm(quality ~ treat + hours)]
+m3 = df[treat %in% c(0,1), lm(quality ~ treat + hours + id)]
+```
+
+### Regression Results
+
+Table \ref{tab:regressions} shows the results of three regressions models.  None of them show statistically significance of the treatment (screen-time before bed) affecting sleep quality.  The number of hours slept and the specific person has way more effect on sleep quality.
+```{r regressions, results='asis'}
+stargazer(
+    m1, m2, m3,
+    header = F,
+    title = '\\label{tab:regressions} Regressions',
+    covariate.labels = c('Treatment (Screen-time)', 'Hours Slept', 'Subject ID')
+)
+```

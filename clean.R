@@ -10,8 +10,8 @@ df = df %>%
     # get emails
     .[, email := sapply(id, function(x) resp_final[ID == x, Email.Address])] %>%
     
-    # drop 'S' in id and change to factor
-    .[, id := as.factor(sapply(id, function(x) as.numeric(substr(as.character(x), 2, 4))))] %>%
+    # drop 'S' in id
+    .[, id := sapply(id, function(x) substr(as.character(x), 2, 4))] %>%
     
     # convert time to hours
     .[, hours := sapply(time, function(x) {
@@ -22,9 +22,8 @@ df = df %>%
     # drop hours less than 1
     .[hours > 1, ] %>%
     
-    # convert treat to -1, 0, 1 (2 doesn't make sense)
-    .[treat == 2, treat := -1] %>%
-    .[, treat := as.factor(treat)]
+    # convert treat to -1, 0, 1 (-1 feels more conventional)
+    .[treat == 2, treat := -1]
 
 # join with cleaned initial responses
 df = df[resp_init, on = 'email']

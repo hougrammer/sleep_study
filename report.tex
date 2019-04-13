@@ -70,30 +70,30 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
+\newcommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
 }
 
 \setlength{\droptitle}{-2em}
-
   \title{W241 Final Report}
-    \pretitle{\vspace{\droptitle}\centering\huge}
+  \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{David Hou, Ravi Ayyappan, Ahsen Qamar}
-    \preauthor{\centering\large\emph}
+  \author{David Hou, Ravi Ayyappan, Ahsen Qamar}
+  \preauthor{\centering\large\emph}
   \postauthor{\par}
-      \predate{\centering\large\emph}
+  \predate{\centering\large\emph}
   \postdate{\par}
-    \date{April 2019}
+  \date{April 2019}
 
 \usepackage{float}
 
 \begin{document}
 \maketitle
 
-\subsection{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
 
 The importance of good sleep habits is emphasized quite often in
 contemporary advice. One aspect of good sleep hygiene is the avoidance
@@ -105,7 +105,8 @@ as a result of screen-time before bed. Due to our limited expertise and
 resources for studying sleep science, we will perform the measaurement
 using a mobile app.
 
-\subsection{Experiment Design}\label{experiment-design}
+\hypertarget{experiment-design}{%
+\subsection{Experiment Design}\label{experiment-design}}
 
 The app used is called \href{www.sleepcycle.com}{Sleep Cycle} and
 utilizes the phone's microphone to measure a user's sleep cycles
@@ -199,7 +200,8 @@ offered subjects some small monetary compensation and emphasized
 prioritization of honesty of compliance in reporting data. Even so, we
 can never be sure of whether subjects followed instructions.
 
-\subsubsection{Experiment Deviations}\label{experiment-deviations}
+\hypertarget{experiment-deviations}{%
+\subsubsection{Experiment Deviations}\label{experiment-deviations}}
 
 Between the closing the sign-up survey, we asked all respondents to
 begin using the app in order to establish baseline data and help the app
@@ -219,6 +221,64 @@ subjects and out of curiosity for the effects on ourselves. Though we
 were not aware of our own randomization a priori, we obviously had more
 knowledge of the experiment than other subjects, so we will analyze our
 own data with special care.
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+\hypertarget{data-cleaning}{%
+\subsubsection{Data Cleaning}\label{data-cleaning}}
+
+We made as little modification to the raw data as possible, but a few
+exceptions exist. We decided to omit entries for which the subject slept
+for a duration shorter than one hour. On case by case basis, we
+determined that these entries were caused by improper usage of the app.
+There were several entries where the user had two entries in one night,
+separated by some period of awakeness. In these cases, one or both of
+the periods of sleep were also very short. However, none of them fell
+under the one hour threshold for omission.
+
+\hypertarget{regression-results}{%
+\subsubsection{Regression Results}\label{regression-results}}
+
+Table \ref{tab:regressions} shows the results of three regressions
+models. None of them show statistically significance of the treatment
+(screen-time before bed) affecting sleep quality. The number of hours
+slept and the specific person has way more effect on sleep quality.
+
+\begin{table}[!htbp] \centering 
+  \caption{\label{tab:regressions} Regressions} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{quality} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Treatment (Screen-time) & 0.628 & $-$0.358 & $-$0.545 \\ 
+  & (1.468) & (0.986) & (0.983) \\ 
+  & & & \\ 
+ Hours Slept &  & 8.014$^{***}$ & 7.889$^{***}$ \\ 
+  &  & (0.396) & (0.397) \\ 
+  & & & \\ 
+ Subject ID &  &  & 0.139$^{**}$ \\ 
+  &  &  & (0.058) \\ 
+  & & & \\ 
+ Constant & 70.618$^{***}$ & 14.085$^{***}$ & 13.172$^{***}$ \\ 
+  & (1.071) & (2.888) & (2.893) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 336 & 336 & 336 \\ 
+R$^{2}$ & 0.001 & 0.551 & 0.559 \\ 
+Adjusted R$^{2}$ & $-$0.002 & 0.549 & 0.555 \\ 
+Residual Std. Error & 13.424 (df = 334) & 9.009 (df = 333) & 8.947 (df = 332) \\ 
+F Statistic & 0.183 (df = 1; 334) & 204.530$^{***}$ (df = 2; 333) & 140.133$^{***}$ (df = 3; 332) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
 
 
 \end{document}
