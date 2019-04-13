@@ -20,9 +20,16 @@ df = df %>%
     })] %>%
     
     # drop hours less than 1
-    .[hours > 1, ]
+    .[hours > 1, ] %>%
+    
+    # convert treat to -1, 0, 1 (2 doesn't make sense)
+    .[treat == 2, treat := -1] %>%
+    .[, treat := as.factor(treat)]
 
 # join with cleaned initial responses
 df = df[resp_init, on = 'email']
+
+# remove NAs from people who did not particpate
+df = df[!is.na(id), ]
 
 write.csv(df, 'data/cleaned.csv', row.names = F)
