@@ -10,11 +10,8 @@ df = df %>%
     # get emails
     .[, email := sapply(id, function(x) resp_final[ID == x, Email.Address])] %>%
     
-    # # get names
-    # .[, name := sapply(email, function(x) resp_init[Email.Address == x, Full.Name])] %>% 
-    
-    # drop 'S' in id and change to numeric
-    .[, id := sapply(id, function(x) as.numeric(substr(as.character(x), 2, 4)))] %>%
+    # drop 'S' in id and change to factor
+    .[, id := as.factor(sapply(id, function(x) as.numeric(substr(as.character(x), 2, 4))))] %>%
     
     # convert time to hours
     .[, hours := sapply(time, function(x) {
@@ -27,3 +24,5 @@ df = df %>%
 
 # join with cleaned initial responses
 df = df[resp_init, on = 'email']
+
+write.csv(df, 'data/cleaned.csv', row.names = F)
