@@ -5,6 +5,7 @@ date: "April 2019"
 output: 
   pdf_document: 
     keep_tex: yes
+    fig_caption: yes
 urlcolor: blue
 linkcolor: blue
 header-includes:
@@ -67,9 +68,42 @@ m2 = df[treat %in% c(0,1), lm(quality ~ treat + hours)]
 m3 = df[treat %in% c(0,1), lm(quality ~ treat + hours + id)]
 ```
 
-### Regression Results
+### Results
 
-Table \ref{tab:regressions} shows the results of three regressions models.  None of them show statistically significance of the treatment (screen-time before bed) affecting sleep quality.  The number of hours slept and the specific person has way more effect on sleep quality.
+Figure \ref{fig:mean_quality} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
+
+
+```{r mean_quality, fig.cap='\\label{fig:mean_quality} Mean sleep quality by treatment'}
+# I'm going to be reusing df2 as a variable name a lot.  I'm too lazy to come up with something more meaningful.
+df2 = df[, .(mean = mean(quality), sd = sd(quality)), by = treat]
+df2$label = c('-1 (Baseline)', '0 (No Screen Time)', '1 (Screen Time)')
+ggplot(df2, aes(x=label, y=mean)) + 
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2) +
+    labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Treatment')
+```
+
+It is already clear that our experiment is too underpowered to detect a treatment effect, as the error bars are extremely large comapred to the barely noticeable differences in means.  Table \ref{tab:mean_quality_tab} shows the tabular results for Figure \ref{fig:mean_quality}.  The point estimate for screen time is slightly lower than that of no screen time, but the standard error is way too large for this difference to be statistically significant.
+
+```{r mean_quality_tab, results='asis'}
+df2 = df2[, c(4,2,3)] # reorder columns
+df2$label = c('Baseline', 'No Screen Time', 'Screen Time')
+names(df2) = c('Label', 'Mean', 'St. Dev.')
+stargazer(
+    df2, 
+    header = F,
+    summary = F, 
+    rownames = F,
+    title = '\\label{tab:mean_quality_tab} Mean sleep quality by treatment')
+```
+
+Table \ref{tab:regressions} shows the results of three regressions models:  
+
+1. $quality = \beta_0 + \beta_1 treat$
+2. $quality = \beta_0 + \beta_1 treat + \beta_2 hours$
+3. $quality = \beta_0 + \beta_1 treat + \beta_2 hours + \beta_3 id$
+
+The covariates refer to treatment, hours slept, and unique indicators for each person in the study.  As expected, none of them show statistically significance of the treatment (screen-time before bed) affecting sleep quality.  The number of hours slept and the specific person has way more effect on sleep quality.
 ```{r regressions, results='asis'}
 stargazer(
     m1, m2, m3,
@@ -78,3 +112,7 @@ stargazer(
     covariate.labels = c('Treatment (Screen-time)', 'Hours Slept', 'Subject ID')
 )
 ```
+
+## Conclusion
+
+This experiment was too small to demonstrate any statistically significant treatment effect.  It would be interesting to repeat this test with a much larger population.

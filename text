@@ -1,0 +1,17 @@
+
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Sun, Apr 14, 2019 - 10:43:14 AM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Max} \\ 
+\hline \\[-1.8ex] 
+treat & 3 & 0.000 & 1.000 & $-$1 & 1 \\ 
+mean & 3 & 70.824 & 0.366 & 70.608 & 71.246 \\ 
+sd & 3 & 14.155 & 1.466 & 12.806 & 15.714 \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 

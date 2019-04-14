@@ -237,13 +237,63 @@ separated by some period of awakeness. In these cases, one or both of
 the periods of sleep were also very short. However, none of them fell
 under the one hour threshold for omission.
 
-\hypertarget{regression-results}{%
-\subsubsection{Regression Results}\label{regression-results}}
+\hypertarget{results-1}{%
+\subsubsection{Results}\label{results-1}}
+
+Figure \ref{fig:mean_quality} shows the sleep quality, averaged over the
+respective time periods, for each treatment assignment. As mentioned
+above, the baseline data was collected in the time between subjects
+signing up and the experiment officially starting. We did not tightly
+control baseline data and not every subject provided it.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/mean_quality-1.pdf}
+\caption{\label{fig:mean_quality} Mean sleep quality by treatment}
+\end{figure}
+
+It is already clear that our experiment is too underpowered to detect a
+treatment effect, as the error bars are extremely large comapred to the
+barely noticeable differences in means. Table \ref{tab:mean_quality_tab}
+shows the tabular results for Figure \ref{fig:mean_quality}. The point
+estimate for screen time is slightly lower than that of no screen time,
+but the standard error is way too large for this difference to be
+statistically significant.
+
+\begin{table}[!htbp] \centering 
+  \caption{\label{tab:mean_quality_tab} Mean sleep quality by treatment} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} ccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Label & Mean & St. Dev. \\ 
+\hline \\[-1.8ex] 
+Baseline & $70.608$ & $15.714$ \\ 
+No Screen Time & $71.246$ & $13.944$ \\ 
+Screen Time & $70.618$ & $12.806$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table}
 
 Table \ref{tab:regressions} shows the results of three regressions
-models. None of them show statistically significance of the treatment
-(screen-time before bed) affecting sleep quality. The number of hours
-slept and the specific person has way more effect on sleep quality.
+models:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(quality = \beta_0 + \beta_1 treat\)
+\item
+  \(quality = \beta_0 + \beta_1 treat + \beta_2 hours\)
+\item
+  \(quality = \beta_0 + \beta_1 treat + \beta_2 hours + \beta_3 id\)
+\end{enumerate}
+
+The covariates refer to treatment, hours slept, and unique indicators
+for each person in the study. As expected, none of them show
+statistically significance of the treatment (screen-time before bed)
+affecting sleep quality. The number of hours slept and the specific
+person has way more effect on sleep quality.
 
 \begin{table}[!htbp] \centering 
   \caption{\label{tab:regressions} Regressions} 
