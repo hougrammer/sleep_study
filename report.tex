@@ -153,7 +153,7 @@ effect. The app also records a ``snore'' and ``steps walked'' value, but
 we have doubts about the accuracy of these measures and will not use
 them in our analysis.
 
-The experiment took place over two weeks, from March 23 to April 6 of
+The experiment took place over two weeks, from March 23 to April 5 of
 2019. Saturday was chosen as the start day of the week because it was
 feared that instructions to change sleep habits in the middle of the
 week might be ignored. We recruited 35 people for the study using a
@@ -237,31 +237,39 @@ separated by some period of awakeness. In these cases, one or both of
 the periods of sleep were also very short. However, none of them fell
 under the one hour threshold for omission.
 
-\hypertarget{results-1}{%
-\subsubsection{Results}\label{results-1}}
+Of the 38 people who originally signed up for the study, only 29 people
+actually submitted final data by the time of writing this report. As
+such, we excluded their results. Note that these subjects are not
+necessarily attriters, as we could not collect data from treatment or
+control.
 
-Figure \ref{fig:mean_quality} shows the sleep quality, averaged over the
-respective time periods, for each treatment assignment. As mentioned
-above, the baseline data was collected in the time between subjects
-signing up and the experiment officially starting. We did not tightly
-control baseline data and not every subject provided it.
+\hypertarget{analysis}{%
+\subsubsection{Analysis}\label{analysis}}
+
+Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality,
+averaged over the respective time periods, for each treatment
+assignment. As mentioned above, the baseline data was collected in the
+time between subjects signing up and the experiment officially starting.
+We did not tightly control baseline data and not every subject provided
+it.
 
 \begin{figure}
 \centering
-\includegraphics{report_files/figure-latex/mean_quality-1.pdf}
-\caption{\label{fig:mean_quality} Mean sleep quality by treatment}
+\includegraphics{report_files/figure-latex/quality_by_treatment_fig-1.pdf}
+\caption{\label{fig:quality_by_treatment_fig} Mean sleep quality by
+treatment}
 \end{figure}
 
 It is already clear that our experiment is too underpowered to detect a
 treatment effect, as the error bars are extremely large comapred to the
-barely noticeable differences in means. Table \ref{tab:mean_quality_tab}
-shows the tabular results for Figure \ref{fig:mean_quality}. The point
-estimate for screen time is slightly lower than that of no screen time,
-but the standard error is way too large for this difference to be
-statistically significant.
+barely noticeable differences in means. Table
+\ref{tab:quality_by_treatment_tab} shows the tabular results for Figure
+\ref{fig:quality_by_treatment_fig}. The point estimate for screen time
+is slightly lower than that of no screen time, but the standard error is
+way too large for this difference to be statistically significant.
 
 \begin{table}[!htbp] \centering 
-  \caption{\label{tab:mean_quality_tab} Mean sleep quality by treatment} 
+  \caption{\label{tab:quality_by_treatment_tab} Mean sleep quality by treatment} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}} ccc} 
 \\[-1.8ex]\hline 
@@ -274,6 +282,28 @@ Screen Time & $70.618$ & $12.806$ \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table}
+
+Figure \ref{fig:quality_by_date_group1_fig} and Figure
+\ref{fig:quality_by_date_group2_fig} show the mean sleep quality by
+dates for the two groups. Recall that group 1 received treatment (screen
+time) in week 1 of the experiment and switched to control (no screen
+time) in week 2. Group 2 had the opposite schedule. Again, the large
+error bars make it hard to draw any sort of conclusion for whether the
+switch in treatment has any effect.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/quality_by_date_group1_fig-1.pdf}
+\caption{\label{fig:quality_by_date_group1_fig} Mean sleep quality by
+date in group which received screen time first}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/quality_by_date_group2_fig-1.pdf}
+\caption{\label{fig:quality_by_date_group2_fig} Mean sleep quality by
+date in group that received no screen time first}
+\end{figure}
 
 Table \ref{tab:regressions} shows the results of three regressions
 models:
@@ -329,6 +359,13 @@ F Statistic & 0.183 (df = 1; 334) & 204.530$^{***}$ (df = 2; 333) & 140.133$^{**
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table}
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+This experiment was too small to demonstrate any statistically
+significant treatment effect. It would be interesting to repeat this
+test with a much larger population.
 
 
 \end{document}

@@ -15,6 +15,7 @@ header-includes:
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = F, fig.pos = 'H')
 library(data.table)
+library(magrittr)
 library(ggplot2)
 library(stargazer)
 ```
@@ -40,7 +41,7 @@ One of these statistics is a "Sleep Quality" number, which is the principle outc
 
 Of the four factors, users generally only have direct control over the first one.  In order to be less intrusive, we did not control the amount of time that users spend in bed, but we did instruct subjects to try to sleep at regular hours every night.  The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect.  The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
 
-The experiment took place over two weeks, from March 23 to April 6 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demogrphic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
+The experiment took place over two weeks, from March 23 to April 5 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demogrphic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
 
 All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix).  When instructing subjects to use electronics prior to bed, we did not mandate any specific activity, as we felt it would increase non-complicance on an already-intrusive study.  We only specified that users should use some sort of eletronic device with a backlit screen for 30 minutes immediately before bedtime.  Similarly, we did not ask subjects in the other group to perform anything in lieu of elctronic usage.  These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
 
@@ -56,24 +57,25 @@ After closing the sign-up survey, we decided to also included ourselves as subje
 
 ## Results
 
+```{r}
+df = data.table(read.csv('data/cleaned.csv', stringsAsFactors = F))
+df = df %>%
+    .[, treat := as.factor(treat)] %>%
+    .[, start_date := as.Date(start_date)] %>%
+    .[, end_date := as.Date(end_date)]
+```
+
 ### Data Cleaning
 
 We made as little modification to the raw data as possible, but a few exceptions exist.  We decided to omit entries for which the subject slept for a duration shorter than one hour.  On case by case basis, we determined that these entries were caused by improper usage of the app.  There were several entries where the user had two entries in one night, separated by some period of awakeness.  In these cases, one or both of the periods of sleep were also very short.  However, none of them fell under the one hour threshold for omission.
 
-```{r}
-df = data.table(read.csv('data/cleaned.csv'))
-df[, treat := as.factor(treat)]
-m1 = df[treat %in% c(0,1), lm(quality ~ treat)]
-m2 = df[treat %in% c(0,1), lm(quality ~ treat + hours)]
-m3 = df[treat %in% c(0,1), lm(quality ~ treat + hours + id)]
-```
+Of the 38 people who originally signed up for the study, only 29 people actually submitted final data by the time of writing this report.  As such, we excluded their results.  Note that these subjects are not necessarily attriters, as we could not collect data from treatment or control.  
 
-### Results
+### Analysis
 
-Figure \ref{fig:mean_quality} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
+Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
 
-
-```{r mean_quality, fig.cap='\\label{fig:mean_quality} Mean sleep quality by treatment'}
+```{r quality_by_treatment_fig, fig.cap='\\label{fig:quality_by_treatment_fig} Mean sleep quality by treatment'}
 # I'm going to be reusing df2 as a variable name a lot.  I'm too lazy to come up with something more meaningful.
 df2 = df[, .(mean = mean(quality), sd = sd(quality)), by = treat]
 df2$label = c('-1 (Baseline)', '0 (No Screen Time)', '1 (Screen Time)')
@@ -83,9 +85,9 @@ ggplot(df2, aes(x=label, y=mean)) +
     labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Treatment')
 ```
 
-It is already clear that our experiment is too underpowered to detect a treatment effect, as the error bars are extremely large comapred to the barely noticeable differences in means.  Table \ref{tab:mean_quality_tab} shows the tabular results for Figure \ref{fig:mean_quality}.  The point estimate for screen time is slightly lower than that of no screen time, but the standard error is way too large for this difference to be statistically significant.
+It is already clear that our experiment is too underpowered to detect a treatment effect, as the error bars are extremely large comapred to the barely noticeable differences in means.  Table \ref{tab:quality_by_treatment_tab} shows the tabular results for Figure \ref{fig:quality_by_treatment_fig}.  The point estimate for screen time is slightly lower than that of no screen time, but the standard error is way too large for this difference to be statistically significant.
 
-```{r mean_quality_tab, results='asis'}
+```{r quality_by_treatment_tab, results='asis'}
 df2 = df2[, c(4,2,3)] # reorder columns
 df2$label = c('Baseline', 'No Screen Time', 'Screen Time')
 names(df2) = c('Label', 'Mean', 'St. Dev.')
@@ -94,7 +96,41 @@ stargazer(
     header = F,
     summary = F, 
     rownames = F,
-    title = '\\label{tab:mean_quality_tab} Mean sleep quality by treatment')
+    title = '\\label{tab:quality_by_treatment_tab} Mean sleep quality by treatment')
+```
+
+Figure \ref{fig:quality_by_date_group1_fig} and Figure \ref{fig:quality_by_date_group2_fig} show the mean sleep quality by dates for the two groups.  Recall that group 1 received treatment (screen time) in week 1 of the experiment and switched to control (no screen time) in week 2.  Group 2 had the opposite schedule.  Again, the large error bars make it hard to draw any sort of conclusion for whether the switch in treatment has any effect.
+
+```{r quality_by_date_group1_fig, fig.cap='\\label{fig:quality_by_date_group1_fig} Mean sleep quality by date in group which received screen time first', warning=FALSE}
+
+df2 = df[
+    start_date >= '2019-03-23' & start_date <= '2019-04-05' & screen_first == 1,
+    .(mean = mean(quality), sd = sd(quality)), 
+    by = start_date
+]
+ggplot(df2, aes(x=start_date, y=mean)) + 
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2) +
+    geom_vline(xintercept = as.numeric(as.Date('2019-03-30')) - .5, col = 'red', size = 1) +
+    labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Date (Screen Time First)') +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+    scale_x_date(breaks = df2$start_date, date_labels = '%b %d')
+```
+
+```{r quality_by_date_group2_fig, fig.cap='\\label{fig:quality_by_date_group2_fig} Mean sleep quality by date in group that received no screen time first', warning=FALSE}
+
+df2 = df[
+    start_date >= '2019-03-23' & start_date <= '2019-04-05' & screen_first == 0,
+    .(mean = mean(quality), sd = sd(quality)), 
+    by = start_date
+]
+ggplot(df2, aes(x=start_date, y=mean)) + 
+    geom_bar(stat="identity") +
+    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2) +
+    geom_vline(xintercept = as.numeric(as.Date('2019-03-30')) - .5, col = 'red', size = 1) +
+    labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Date (No Screen Time First)') +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+    scale_x_date(breaks = df2$start_date, date_labels = '%b %d')
 ```
 
 Table \ref{tab:regressions} shows the results of three regressions models:  
@@ -104,6 +140,13 @@ Table \ref{tab:regressions} shows the results of three regressions models:
 3. $quality = \beta_0 + \beta_1 treat + \beta_2 hours + \beta_3 id$
 
 The covariates refer to treatment, hours slept, and unique indicators for each person in the study.  As expected, none of them show statistically significance of the treatment (screen-time before bed) affecting sleep quality.  The number of hours slept and the specific person has way more effect on sleep quality.
+
+```{r}
+m1 = df[treat %in% c(0,1), lm(quality ~ treat)]
+m2 = df[treat %in% c(0,1), lm(quality ~ treat + hours)]
+m3 = df[treat %in% c(0,1), lm(quality ~ treat + hours + id)]
+```
+
 ```{r regressions, results='asis'}
 stargazer(
     m1, m2, m3,
