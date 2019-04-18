@@ -1,4 +1,4 @@
-\documentclass[]{article}
+\documentclass[12pt,]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -25,8 +25,8 @@
 \usepackage{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{unicode=true,
-            pdftitle={W241 Final Report},
-            pdfauthor={David Hou, Ravi Ayyappan, Ahsen Qamar},
+            pdftitle={Sleep Study Experiment},
+            pdfauthor={David Hou; Ravi Ayyappan; Ahsen Qamar},
             colorlinks=true,
             linkcolor=blue,
             citecolor=Blue,
@@ -77,23 +77,24 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{W241 Final Report}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+
+  \title{Sleep Study Experiment}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{David Hou, Ravi Ayyappan, Ahsen Qamar}
-  \preauthor{\centering\large\emph}
+  \subtitle{W241 Final Project}
+  \author{David Hou \\ Ravi Ayyappan \\ Ahsen Qamar}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{April 2019}
+    \date{18 April 2019}
 
 \usepackage{float}
 
 \begin{document}
 \maketitle
 
-\hypertarget{introduction}{%
-\subsection{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 The importance of good sleep habits is emphasized quite often in
 contemporary advice. One aspect of good sleep hygiene is the avoidance
@@ -102,11 +103,28 @@ these screens causes the brain to stay under the assumption of daytime,
 inhibiting the production of the sleep hormone melatonin. In this
 experiment, we seek a quantitative measure of sleep quality degradation
 as a result of screen-time before bed. Due to our limited expertise and
-resources for studying sleep science, we will perform the measaurement
+resources for studying sleep science, we will perform the measurement
 using a mobile app.
 
-\hypertarget{experiment-design}{%
-\subsection{Experiment Design}\label{experiment-design}}
+\section{Research Question}\label{research-question}
+
+\emph{Does using an electronic device with a screen, thirty minutes
+prior to going to bed, have any statistically significant effect on the
+sleep quality for that individual for that specific night?}
+
+\section{Hypothesis}\label{hypothesis}
+
+Our team hypothesizes that that use of an electronic device with a
+screen, at least thirty minutes prior to going to bed, degrades the
+overall sleep quality for that night. The null hypothesis would
+correspondingly say that there is no statistical significance between
+screen time thirty minutes before going to bed and sleep quality.
+
+A secondary question we will analyze is whether not using an electronic
+device thirty minutes prior to going to bed improves sleep quality for
+that night.
+
+\section{Experiment Design}\label{experiment-design}
 
 The app used is called \href{www.sleepcycle.com}{Sleep Cycle} and
 utilizes the phone's microphone to measure a user's sleep cycles
@@ -158,7 +176,7 @@ The experiment took place over two weeks, from March 23 to April 5 of
 feared that instructions to change sleep habits in the middle of the
 week might be ignored. We recruited 35 people for the study using a
 Google survey, consisting of classmates, friends, and family. In
-addition to asking for contact and demogrphic information, the survey
+addition to asking for contact and demographic information, the survey
 also inquired about general sleep habits such as bedtime and pre-sleep
 activities. While the survey did ask about electronic usage, the
 questions were mixed in among other questions such as workout habits and
@@ -169,11 +187,11 @@ variable of interest.
 All communications to subjects occurred over email. Every person in the
 same experimental group received identical emails (see Appendix). When
 instructing subjects to use electronics prior to bed, we did not mandate
-any specific activity, as we felt it would increase non-complicance on
-an already-intrusive study. We only specified that users should use some
-sort of eletronic device with a backlit screen for 30 minutes
+any specific activity, as we felt it would increase non-compliance on an
+already-intrusive study. We only specified that users should use some
+sort of electronic device with a backlit screen for 30 minutes
 immediately before bedtime. Similarly, we did not ask subjects in the
-other group to perform anything in lieu of elctronic usage. These
+other group to perform anything in lieu of electronic usage. These
 subjects were simply asked to refrain from using electronics with
 backlit screens 30 minutes before bedtime.
 
@@ -190,7 +208,7 @@ do not expect any anticipation effects.
 
 The nature of experiment requires effort from subjects in both treatment
 and control. That is, for people who normally use electronic devices
-before bed, the request to refrain from useage constitutes a significant
+before bed, the request to refrain from usage constitutes a significant
 change in pre-sleep ritual; for people who normally avoid electronics
 before bed, the opposite is true. Therefore, we are concerned with
 two-sided non-compliance, which is especially difficult to measure in
@@ -200,8 +218,7 @@ offered subjects some small monetary compensation and emphasized
 prioritization of honesty of compliance in reporting data. Even so, we
 can never be sure of whether subjects followed instructions.
 
-\hypertarget{experiment-deviations}{%
-\subsubsection{Experiment Deviations}\label{experiment-deviations}}
+\subsection{Experiment Deviations}\label{experiment-deviations}
 
 Between the closing the sign-up survey, we asked all respondents to
 begin using the app in order to establish baseline data and help the app
@@ -222,11 +239,9 @@ were not aware of our own randomization a priori, we obviously had more
 knowledge of the experiment than other subjects, so we will analyze our
 own data with special care.
 
-\hypertarget{results}{%
-\subsection{Results}\label{results}}
+\section{Results}\label{results}
 
-\hypertarget{data-cleaning}{%
-\subsubsection{Data Cleaning}\label{data-cleaning}}
+\subsection{Data Cleaning}\label{data-cleaning}
 
 We made as little modification to the raw data as possible, but a few
 exceptions exist. We decided to omit entries for which the subject slept
@@ -243,8 +258,7 @@ such, we excluded their results. Note that these subjects are not
 necessarily attriters, as we could not collect data from treatment or
 control.
 
-\hypertarget{analysis}{%
-\subsubsection{Analysis}\label{analysis}}
+\subsection{Analysis}\label{analysis}
 
 Before presenting the analysis, it should be noted that this experiment
 is very underpowered. It was difficult to recruit a significant number
@@ -350,7 +364,7 @@ account that multiple entries in the dataset came from the same person.
 We assigned a numerical ID to each participant in the study. This
 provides a unique indicator variable for each person and the standard
 errors reported in Table \ref{tab:quality_regressions} are actually
-clustered standard errors based on thsoe IDs. In model 2, we control for
+clustered standard errors based on those IDs. In model 2, we control for
 the fixed effects to each person. This brings down the treatment effect
 (which was already statistically insignificant) even closer to zero.
 
@@ -479,7 +493,7 @@ F Statistic & 650.944$^{***}$ (df = 1; 464) \\
 \end{tabular} 
 \end{table}
 
-Thus, we run the anlogous three regression to Table
+Thus, we run the analogous three regression to Table
 \ref{tab:quality_regressions}. Table \ref{tab:hours_regressions} shows
 the results. Again, we see no statistically significant treatment
 effects. However, the bed time coefficient is still significant. It is
@@ -551,8 +565,7 @@ F Statistic & 0.819 (df = 1; 334) & 6.988$^{***}$ (df = 29; 306) & 5.169$^{***}$
 \end{tabular} 
 \end{table}
 
-\hypertarget{non-compliance}{%
-\subsubsection{Non-compliance}\label{non-compliance}}
+\subsection{Non-compliance}\label{non-compliance}
 
 \begin{figure}
 \centering
@@ -562,18 +575,24 @@ each participant}
 \end{figure}
 
 Non-compliance was major issue in this experiment. Beyond not following
-our instructions on electronics useage, many subjects simply did not use
+our instructions on electronics usage, many subjects simply did not use
 the app. Figure \ref{fig:days_used} shows the number of nights of data
 that each subject actually submitted. The experiment took place over two
 weeks and ideally we would have received 14 nights of data from each
 person. Clearly this was not the case. The mean number of nights
-submitted was just 11.6 days, with one particpant only using the app for
-2 out of the 14 nights. As an aside, the one subject with 15 nights of
-data used the app twice in one night. The subject went to sleep, woke
+submitted was just 11.6 days, with one participant only using the app
+for 2 out of the 14 nights. As an aside, the one subject with 15 nights
+of data used the app twice in one night. The subject went to sleep, woke
 up, and then went to sleep again.
 
-\hypertarget{conclusion}{%
-\subsection{Conclusion}\label{conclusion}}
+\section{Conclusion}\label{conclusion}
+
+Through our findings and analysis of the data we reject our hypothesis
+that there is statistical significance between thirty minutes of screen
+time before going to bed and sleep quality. Additionally we fail to
+reject the null hypothesis which suggests that there is no statistical
+significance between screen time thirty minutes before going to bed and
+dleep quality.
 
 This experiment was too small to demonstrate any statistically
 significant treatment effect. It would be interesting to repeat this

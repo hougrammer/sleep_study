@@ -1,11 +1,16 @@
 ---
-title: "W241 Final Report"
-author: "David Hou, Ravi Ayyappan, Ahsen Qamar"
-date: "April 2019"
+title: "Sleep Study Experiment"
+subtitle: "W241 Final Project"
+author:
+- "David Hou"
+- "Ravi Ayyappan"
+- "Ahsen Qamar"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
   pdf_document: 
     keep_tex: yes
     fig_caption: yes
+fontsize: 12pt
 urlcolor: blue
 linkcolor: blue
 header-includes:
@@ -22,11 +27,21 @@ library(pwr)
 library(sandwich)
 ```
 
-## Introduction
+# Introduction
 
-The importance of good sleep habits is emphasized quite often in contemporary advice.  One aspect of good sleep hygiene is the avoidance of electronic devices with backlit screens prior to bed.  The light from these screens causes the brain to stay under the assumption of daytime, inhibiting the production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed.  Due to our limited expertise and resources for studying sleep science, we will perform the measaurement using a mobile app.
+The importance of good sleep habits is emphasized quite often in contemporary advice.  One aspect of good sleep hygiene is the avoidance of electronic devices with backlit screens prior to bed.  The light from these screens causes the brain to stay under the assumption of daytime, inhibiting the production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed.  Due to our limited expertise and resources for studying sleep science, we will perform the measurement using a mobile app.
 
-## Experiment Design
+# Research Question
+
+_Does using an electronic device with a screen, thirty minutes prior to going to bed, have any statistically significant effect on the sleep quality for that individual for that specific night?_
+
+# Hypothesis
+
+Our team hypothesizes that that use of an electronic device with a screen, at least thirty minutes prior to going to bed, degrades the overall sleep quality for that night. The null hypothesis would correspondingly say that there is no statistical significance between screen time thirty minutes before going to bed and sleep quality.
+
+A secondary question we will analyze is whether not using an electronic device thirty minutes prior to going to bed improves sleep quality for that night.
+
+# Experiment Design
 
 The app used is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles overnight.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  Figure \ref{fig:example_night} shows an example of the output from one night's data.
 
@@ -43,21 +58,21 @@ One of these statistics is a "Sleep Quality" number, which is the principle outc
 
 Of the four factors, users generally only have direct control over the first one.  In order to be less intrusive, we did not control the amount of time that users spend in bed, but we did instruct subjects to try to sleep at regular hours every night.  The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect.  The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
 
-The experiment took place over two weeks, from March 23 to April 5 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demogrphic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
+The experiment took place over two weeks, from March 23 to April 5 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demographic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
 
-All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix).  When instructing subjects to use electronics prior to bed, we did not mandate any specific activity, as we felt it would increase non-complicance on an already-intrusive study.  We only specified that users should use some sort of eletronic device with a backlit screen for 30 minutes immediately before bedtime.  Similarly, we did not ask subjects in the other group to perform anything in lieu of elctronic usage.  These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
+All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix).  When instructing subjects to use electronics prior to bed, we did not mandate any specific activity, as we felt it would increase non-compliance on an already-intrusive study.  We only specified that users should use some sort of electronic device with a backlit screen for 30 minutes immediately before bedtime.  Similarly, we did not ask subjects in the other group to perform anything in lieu of electronic usage.  These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
 
 Subjects were assigned randomly to two groups, with group 1 receiving treatment (screen-time before bed) during the first week and group 2 receiving control (no screen-time before bed).  After the first week, subjects were instructed to swap to the opposite activity of what they were assigned to initially.  The swapping design allows us to perform within-subject comparisons while also leaving time for treatment effects to manifest themselves.  With the group that received treatment first, we are also able to perform some analysis on persistence effects.  Note that subjects were not informed of the instruction swap ahead of time, so we do not expect any anticipation effects.
 
-The nature of experiment requires effort from subjects in both treatment and control.  That is, for people who normally use electronic devices before bed, the request to refrain from useage constitutes a significant change in pre-sleep ritual; for people who normally avoid electronics before bed, the opposite is true.  Therefore, we are concerned with two-sided non-compliance, which is especially difficult to measure in this experiment because people are unlikely to honestly report when they have deviated from our instructions.  To help combat this somewhat, we offered subjects some small monetary compensation and emphasized prioritization of honesty of compliance in reporting data.  Even so, we can never be sure of whether subjects followed instructions.
+The nature of experiment requires effort from subjects in both treatment and control.  That is, for people who normally use electronic devices before bed, the request to refrain from usage constitutes a significant change in pre-sleep ritual; for people who normally avoid electronics before bed, the opposite is true.  Therefore, we are concerned with two-sided non-compliance, which is especially difficult to measure in this experiment because people are unlikely to honestly report when they have deviated from our instructions.  To help combat this somewhat, we offered subjects some small monetary compensation and emphasized prioritization of honesty of compliance in reporting data.  Even so, we can never be sure of whether subjects followed instructions.
 
-### Experiment Deviations
+## Experiment Deviations
 
 Between the closing the sign-up survey, we asked all respondents to begin using the app in order to establish baseline data and help the app calibrate (the website claims that the app becomes more accurate over time).  Sleep habits during this baseline usage were not closely controlled or monitored, as each subject signed up for the experiment at different dates.  However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export.  At this time, we learned that Android users could not perform the export due to missing functionality in the app.  As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
 
 After closing the sign-up survey, we decided to also included ourselves as subjects in the experiment.  This was to slightly raise the number of subjects and out of curiosity for the effects on ourselves.  Though we were not aware of our own randomization a priori, we obviously had more knowledge of the experiment than other subjects, so we will analyze our own data with special care.
 
-## Results
+# Results
 
 ```{r}
 df = data.table(read.csv('data/cleaned.csv', stringsAsFactors = F))
@@ -67,13 +82,13 @@ df = df %>%
     .[, end_date := as.Date(end_date)]
 ```
 
-### Data Cleaning
+## Data Cleaning
 
 We made as little modification to the raw data as possible, but a few exceptions exist.  We decided to omit entries for which the subject slept for a duration shorter than one hour.  On case by case basis, we determined that these entries were caused by improper usage of the app.  There were several entries where the user had two entries in one night, separated by some period of awakeness.  In these cases, one or both of the periods of sleep were also very short.  However, none of them fell under the one hour threshold for omission.
 
 Of the 38 people who originally signed up for the study, only 29 people actually submitted final data by the time of writing this report.  As such, we excluded their results.  Note that these subjects are not necessarily attriters, as we could not collect data from treatment or control.  
 
-### Analysis
+## Analysis
 
 ```{r, include=FALSE}
 pwr.t.test(n = 29, d = .2, sig.level = 0.05)
@@ -160,7 +175,7 @@ Table \ref{tab:quality_regressions} shows the results of three regressions model
 
 In model 1, we naively regress on just the treatment variable.  This yields the 0.628 point effect that was already shown in Table \ref{tab:quality_by_treatment_tab}.  However, we are not taking into the account that multiple entries in the dataset came from the same person.
 
-We assigned a numerical ID to each participant in the study.  This provides a unique indicator variable for each person and the standard errors reported in Table \ref{tab:quality_regressions} are actually clustered standard errors based on thsoe IDs.  In model 2, we control for the fixed effects to each person.  This brings down the treatment effect (which was already statistically insignificant) even closer to zero.
+We assigned a numerical ID to each participant in the study.  This provides a unique indicator variable for each person and the standard errors reported in Table \ref{tab:quality_regressions} are actually clustered standard errors based on those IDs.  In model 2, we control for the fixed effects to each person.  This brings down the treatment effect (which was already statistically insignificant) even closer to zero.
 
 Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  The self-reported bedtime stands out as a variable that is highly statistically significant.  We will not draw any causal inference from this fact, as we did not randomize subjects' bedtimes.  It is also important to reiterate that these are not the actual observed bed times in the experiment, but the estimated bed time that subjects reported in the pre-experiment survey.  However, it does seem that for this group of people, self-reported late sleepers also have higher sleep quality.  In addition, we are surprised that whether or not a subject shared a bed with a partner did not have even higher statistical significance.  Unless both people are simultaneously using the app, *Sleep Cycle* cannot distinguish movement from one person or another.  It should be the case that multiple people should make much more noise and trick the app into thinking that its user is awake for longer than actuality.
 
@@ -210,7 +225,7 @@ stargazer(
 )
 ```
 
-Thus, we run the anlogous three regression to Table \ref{tab:quality_regressions}.  Table \ref{tab:hours_regressions} shows the results.  Again, we see no statistically significant treatment effects.  However, the bed time coefficient is still significant.  It is worth investigating this further.
+Thus, we run the analogous three regression to Table \ref{tab:quality_regressions}.  Table \ref{tab:hours_regressions} shows the results.  Again, we see no statistically significant treatment effects.  However, the bed time coefficient is still significant.  It is worth investigating this further.
 
 ```{r}
 m1 = df[treat %in% c(0,1), lm(hours ~ treat)]
@@ -234,7 +249,7 @@ stargazer(
 )
 ```
 
-### Non-compliance
+## Non-compliance
 
 ```{r days_used, fig.cap='\\label{fig:days_used} Number of nights of data submitted by each participant'}
 df2 = df[treat == 0 | treat == 1, .N, by = id]
@@ -244,8 +259,10 @@ ggplot(df2, aes(id, N)) +
     labs(x = 'Subject ID', y = 'Nights of data', title = 'Data submitted by each subject')
 ```
 
-Non-compliance was major issue in this experiment.  Beyond not following our instructions on electronics useage, many subjects simply did not use the app.  Figure \ref{fig:days_used} shows the number of nights of data that each subject actually submitted.  The experiment took place over two weeks and ideally we would have received 14 nights of data from each person.  Clearly this was not the case.  The mean number of nights submitted was just 11.6 days, with one particpant only using the app for 2 out of the 14 nights.  As an aside, the one subject with 15 nights of data used the app twice in one night.  The subject went to sleep, woke up, and then went to sleep again.  
+Non-compliance was major issue in this experiment.  Beyond not following our instructions on electronics usage, many subjects simply did not use the app.  Figure \ref{fig:days_used} shows the number of nights of data that each subject actually submitted.  The experiment took place over two weeks and ideally we would have received 14 nights of data from each person.  Clearly this was not the case.  The mean number of nights submitted was just 11.6 days, with one participant only using the app for 2 out of the 14 nights.  As an aside, the one subject with 15 nights of data used the app twice in one night.  The subject went to sleep, woke up, and then went to sleep again.  
 
-## Conclusion
+# Conclusion
+
+Through our findings and analysis of the data we reject our hypothesis that there is statistical significance between thirty minutes of screen time before going to bed and sleep quality. Additionally we fail to reject the null hypothesis which suggests that there is no statistical significance between screen time thirty minutes before going to bed and dleep quality.
 
 This experiment was too small to demonstrate any statistically significant treatment effect.  It would be interesting to repeat this test with a much larger population.
