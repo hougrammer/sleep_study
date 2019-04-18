@@ -13,11 +13,13 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo = F, fig.pos = 'H')
+knitr::opts_chunk$set(echo = F, fig.pos = 'H', fig.height = 4)
 library(data.table)
 library(magrittr)
 library(ggplot2)
 library(stargazer)
+library(pwr)
+library(sandwich)
 ```
 
 ## Introduction
@@ -73,24 +75,37 @@ Of the 38 people who originally signed up for the study, only 29 people actually
 
 ### Analysis
 
-Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
+```{r, include=FALSE}
+pwr.t.test(n = 29, d = .2, sig.level = 0.05)
+```
+
+Before presenting the analysis, it should be noted that this experiment is very underpowered.  It was difficult to recruit a significant number of people who would agree to have their sleep monitored and controlled over several weeks.  For our `n` size of 29, to see a small effect size (Cohen's `d = 0.2`) at the 0.05 significance level, we only have a power of about 0.12.
+
+```{r quality_histogram, fig.cap='\\label{fig:quality_histogram} Quality histogram'}
+m = mean(df$quality)
+ggplot(df, aes(x=quality)) + 
+    geom_histogram(bins = 30) +
+    geom_vline(xintercept = m, col = 'red') + 
+    annotate("text", x = m + 7, y = 50, label = paste0("Mean = ", as.character(round(m, 2))), col = 'red') +
+    labs(title = 'Quality Histogram', x = 'Quality', y = 'Count')
+```
+
+Figure \ref{fig:quality_histogram} shows the distribution of the sleep quality over the entire experiment.  This includes data from the baseline and actual experiment.  We see a slight left skew, even after removing the entries with fewer than one hour of sleep.  There is also a slight build up at 100 due to that being the maximum number that the app reports.  We do not believe that the peaks around 70 and 80 are special.
 
 ```{r quality_by_treatment_fig, fig.cap='\\label{fig:quality_by_treatment_fig} Mean sleep quality by treatment'}
 # I'm going to be reusing df2 as a variable name a lot.  I'm too lazy to come up with something more meaningful.
-df2 = df[, .(mean = mean(quality), sd = sd(quality)), by = treat]
+df2 = df[order(treat), .(mean = mean(quality), sd = sd(quality)/sqrt(.N)), by = treat]
 df2$label = c('-1 (Baseline)', '0 (No Screen Time)', '1 (Screen Time)')
 ggplot(df2, aes(x=label, y=mean)) + 
-    geom_bar(stat="identity") +
+    geom_point(size = 3) +
     geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2) +
     labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Treatment')
 ```
 
-It is already clear that our experiment is too underpowered to detect a treatment effect, as the error bars are extremely large comapred to the barely noticeable differences in means.  Table \ref{tab:quality_by_treatment_tab} shows the tabular results for Figure \ref{fig:quality_by_treatment_fig}.  The point estimate for screen time is slightly lower than that of no screen time, but the standard error is way too large for this difference to be statistically significant.
-
 ```{r quality_by_treatment_tab, results='asis'}
 df2 = df2[, c(4,2,3)] # reorder columns
 df2$label = c('Baseline', 'No Screen Time', 'Screen Time')
-names(df2) = c('Label', 'Mean', 'St. Dev.')
+names(df2) = c('Label', 'Mean', 'St. Err.')
 stargazer(
     df2, 
     header = F,
@@ -99,13 +114,15 @@ stargazer(
     title = '\\label{tab:quality_by_treatment_tab} Mean sleep quality by treatment')
 ```
 
-Figure \ref{fig:quality_by_date_group1_fig} and Figure \ref{fig:quality_by_date_group2_fig} show the mean sleep quality by dates for the two groups.  Recall that group 1 received treatment (screen time) in week 1 of the experiment and switched to control (no screen time) in week 2.  Group 2 had the opposite schedule.  Again, the large error bars make it hard to draw any sort of conclusion for whether the switch in treatment has any effect.
+Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  The reported error bars are standard error for each time period.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
+
+It is already clear that our experiment will not show the hypothesized effect, as the point estimate for screen time is actually slightly higher than that with no screen time.  More importantly, the standard errors completely dominate any difference between the treatments.  Table \ref{tab:quality_by_treatment_tab} shows the tabular results for Figure \ref{fig:quality_by_treatment_fig}.
 
 ```{r quality_by_date_group1_fig, fig.cap='\\label{fig:quality_by_date_group1_fig} Mean sleep quality by date in group which received screen time first', warning=FALSE}
 
 df2 = df[
     start_date >= '2019-03-23' & start_date <= '2019-04-05' & screen_first == 1,
-    .(mean = mean(quality), sd = sd(quality)), 
+    .(mean = mean(quality), sd = sd(quality)/sqrt(.N)), 
     by = start_date
 ]
 ggplot(df2, aes(x=start_date, y=mean)) + 
@@ -121,7 +138,7 @@ ggplot(df2, aes(x=start_date, y=mean)) +
 
 df2 = df[
     start_date >= '2019-03-23' & start_date <= '2019-04-05' & screen_first == 0,
-    .(mean = mean(quality), sd = sd(quality)), 
+    .(mean = mean(quality), sd = sd(quality)/sqrt(.N)), 
     by = start_date
 ]
 ggplot(df2, aes(x=start_date, y=mean)) + 
@@ -133,28 +150,101 @@ ggplot(df2, aes(x=start_date, y=mean)) +
     scale_x_date(breaks = df2$start_date, date_labels = '%b %d')
 ```
 
-Table \ref{tab:regressions} shows the results of three regressions models:  
+Figure \ref{fig:quality_by_date_group1_fig} and Figure \ref{fig:quality_by_date_group2_fig} show the mean sleep quality by dates for the two groups.  Recall that group 1 received treatment (screen time) in week 1 of the experiment and switched to control (no screen time) in week 2.  Group 2 had the opposite schedule.  Again, the large error bars make it hard to draw any sort of conclusion for whether the switch in treatment has any effect, but it could be argued that there is a slight drop in quality in group 1, after they switch from screen time to no screen time.  Although still likely due to random noise, this drop is probably what primarily drives the treatment point estimate being in the opposite direction of the expected effect.
+
+Table \ref{tab:quality_regressions} shows the results of three regressions models:  
 
 1. $quality = \beta_0 + \beta_1 treat$
-2. $quality = \beta_0 + \beta_1 treat + \beta_2 hours$
-3. $quality = \beta_0 + \beta_1 treat + \beta_2 hours + \beta_3 id$
+2. $quality = \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i$
+3. $quality = \beta_0 + \beta_1 treat + \sum_j \delta_j x_j$
 
-The covariates refer to treatment, hours slept, and unique indicators for each person in the study.  As expected, none of them show statistically significance of the treatment (screen-time before bed) affecting sleep quality.  The number of hours slept and the specific person has way more effect on sleep quality.
+In model 1, we naively regress on just the treatment variable.  This yields the 0.628 point effect that was already shown in Table \ref{tab:quality_by_treatment_tab}.  However, we are not taking into the account that multiple entries in the dataset came from the same person.
+
+We assigned a numerical ID to each participant in the study.  This provides a unique indicator variable for each person and the standard errors reported in Table \ref{tab:quality_regressions} are actually clustered standard errors based on thsoe IDs.  In model 2, we control for the fixed effects to each person.  This brings down the treatment effect (which was already statistically insignificant) even closer to zero.
+
+Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  The self-reported bedtime stands out as a variable that is highly statistically significant.  We will not draw any causal inference from this fact, as we did not randomize subjects' bedtimes.  It is also important to reiterate that these are not the actual observed bed times in the experiment, but the estimated bed time that subjects reported in the pre-experiment survey.  However, it does seem that for this group of people, self-reported late sleepers also have higher sleep quality.  In addition, we are surprised that whether or not a subject shared a bed with a partner did not have even higher statistical significance.  Unless both people are simultaneously using the app, *Sleep Cycle* cannot distinguish movement from one person or another.  It should be the case that multiple people should make much more noise and trick the app into thinking that its user is awake for longer than actuality.
 
 ```{r}
 m1 = df[treat %in% c(0,1), lm(quality ~ treat)]
-m2 = df[treat %in% c(0,1), lm(quality ~ treat + hours)]
-m3 = df[treat %in% c(0,1), lm(quality ~ treat + hours + id)]
+m2 = df[treat %in% c(0,1), lm(quality ~ treat + as.factor(id))]
+m3 = df[treat %in% c(0,1), lm(quality ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + electronics_stop_minutes_before_bed + bed_size + (bed_share=='Yes'))]
+se1 = sqrt(diag(vcovCL(m1, cluster = df[treat %in% c(0,1), id])))
+se2 = sqrt(diag(vcovCL(m2, cluster = df[treat %in% c(0,1), id])))
+se3 = sqrt(diag(vcovCL(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
 ```
 
-```{r regressions, results='asis'}
+```{r quality_regressions, results='asis'}
 stargazer(
     m1, m2, m3,
     header = F,
-    title = '\\label{tab:regressions} Regressions',
-    covariate.labels = c('Treatment (Screen-time)', 'Hours Slept', 'Subject ID')
+    se = list(se1, se2, se3),
+    title = '\\label{tab:quality_regressions} Regressions, outcome is sleep quality',
+    covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
+    dep.var.labels = 'Sleep Quality',
+    omit = 'id',
+    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No'))
 )
 ```
+
+```{r quality_by_hours_fig, fig.cap='\\label{fig:quality_by_hours_fig} Mean sleep quality by hours slept'}
+ggplot(df, aes(hours, quality)) + 
+    geom_point() + 
+    stat_smooth(method = lm) + 
+    labs(x = 'Hours', y = 'Quality', title = 'Sleep Quality by Hours Slept')
+```
+
+Figure \ref{fig:quality_by_hours_fig} shows that sleep quality is highly correlated hours slept.  Table \ref{tab:quality_hours_regression} shows the strength of this relationship.  Since these two variables are so predictive of one-another, it may be interesting to also use hours slept as an outcome variable.
+
+```{r}
+m1 = df[, lm(quality ~ hours)]
+se1 = sqrt(diag(vcovCL(m1, cluster = df[, id])))
+```
+
+```{r quality_hours_regression, results='asis'}
+stargazer(
+    m1,
+    header = F,
+    se = list(se1),
+    title = '\\label{tab:quality_hours_regression} Regression, quality on hours',
+    covariate.labels = 'Hours'
+)
+```
+
+Thus, we run the anlogous three regression to Table \ref{tab:quality_regressions}.  Table \ref{tab:hours_regressions} shows the results.  Again, we see no statistically significant treatment effects.  However, the bed time coefficient is still significant.  It is worth investigating this further.
+
+```{r}
+m1 = df[treat %in% c(0,1), lm(hours ~ treat)]
+m2 = df[treat %in% c(0,1), lm(hours ~ treat + as.factor(id))]
+m3 = df[treat %in% c(0,1), lm(hours ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + electronics_stop_minutes_before_bed + bed_size + (bed_share=='Yes'))]
+se1 = sqrt(diag(vcovCL(m1, cluster = df[treat %in% c(0,1), id])))
+se2 = sqrt(diag(vcovCL(m2, cluster = df[treat %in% c(0,1), id])))
+se3 = sqrt(diag(vcovCL(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
+```
+
+```{r hours_regressions, results='asis'}
+stargazer(
+    m1, m2, m3,
+    header = F,
+    se = list(se1, se2, se3),
+    title = '\\label{tab:hours_regressions} Regressions, outcome is hours slept',
+    covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
+    dep.var.labels = 'Hours Slept',
+    omit = 'id',
+    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No'))
+)
+```
+
+### Non-compliance
+
+```{r days_used, fig.cap='\\label{fig:days_used} Number of nights of data submitted by each participant'}
+df2 = df[treat == 0 | treat == 1, .N, by = id]
+ggplot(df2, aes(id, N)) + 
+    geom_bar(stat = 'identity') +
+    geom_hline(yintercept = 14, col = 'green', size = 1) +
+    labs(x = 'Subject ID', y = 'Nights of data', title = 'Data submitted by each subject')
+```
+
+Non-compliance was major issue in this experiment.  Beyond not following our instructions on electronics useage, many subjects simply did not use the app.  Figure \ref{fig:days_used} shows the number of nights of data that each subject actually submitted.  The experiment took place over two weeks and ideally we would have received 14 nights of data from each person.  Clearly this was not the case.  The mean number of nights submitted was just 11.6 days, with one particpant only using the app for 2 out of the 14 nights.  As an aside, the one subject with 15 nights of data used the app twice in one night.  The subject went to sleep, woke up, and then went to sleep again.  
 
 ## Conclusion
 

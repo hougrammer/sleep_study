@@ -246,12 +246,25 @@ control.
 \hypertarget{analysis}{%
 \subsubsection{Analysis}\label{analysis}}
 
-Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality,
-averaged over the respective time periods, for each treatment
-assignment. As mentioned above, the baseline data was collected in the
-time between subjects signing up and the experiment officially starting.
-We did not tightly control baseline data and not every subject provided
-it.
+Before presenting the analysis, it should be noted that this experiment
+is very underpowered. It was difficult to recruit a significant number
+of people who would agree to have their sleep monitored and controlled
+over several weeks. For our \texttt{n} size of 29, to see a small effect
+size (Cohen's \texttt{d\ =\ 0.2}) at the 0.05 significance level, we
+only have a power of about 0.12.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/quality_histogram-1.pdf}
+\caption{\label{fig:quality_histogram} Quality histogram}
+\end{figure}
+
+Figure \ref{fig:quality_histogram} shows the distribution of the sleep
+quality over the entire experiment. This includes data from the baseline
+and actual experiment. We see a slight left skew, even after removing
+the entries with fewer than one hour of sleep. There is also a slight
+build up at 100 due to that being the maximum number that the app
+reports. We do not believe that the peaks around 70 and 80 are special.
 
 \begin{figure}
 \centering
@@ -260,36 +273,34 @@ it.
 treatment}
 \end{figure}
 
-It is already clear that our experiment is too underpowered to detect a
-treatment effect, as the error bars are extremely large comapred to the
-barely noticeable differences in means. Table
-\ref{tab:quality_by_treatment_tab} shows the tabular results for Figure
-\ref{fig:quality_by_treatment_fig}. The point estimate for screen time
-is slightly lower than that of no screen time, but the standard error is
-way too large for this difference to be statistically significant.
-
 \begin{table}[!htbp] \centering 
   \caption{\label{tab:quality_by_treatment_tab} Mean sleep quality by treatment} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}} ccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
-Label & Mean & St. Dev. \\ 
+Label & Mean & St. Err. \\ 
 \hline \\[-1.8ex] 
-Baseline & $70.608$ & $15.714$ \\ 
-No Screen Time & $71.246$ & $13.944$ \\ 
-Screen Time & $70.618$ & $12.806$ \\ 
+Baseline & $70.608$ & $1.378$ \\ 
+No Screen Time & $70.618$ & $1.022$ \\ 
+Screen Time & $71.246$ & $1.042$ \\ 
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table}
 
-Figure \ref{fig:quality_by_date_group1_fig} and Figure
-\ref{fig:quality_by_date_group2_fig} show the mean sleep quality by
-dates for the two groups. Recall that group 1 received treatment (screen
-time) in week 1 of the experiment and switched to control (no screen
-time) in week 2. Group 2 had the opposite schedule. Again, the large
-error bars make it hard to draw any sort of conclusion for whether the
-switch in treatment has any effect.
+Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality,
+averaged over the respective time periods, for each treatment
+assignment. The reported error bars are standard error for each time
+period. As mentioned above, the baseline data was collected in the time
+between subjects signing up and the experiment officially starting. We
+did not tightly control baseline data and not every subject provided it.
+
+It is already clear that our experiment will not show the hypothesized
+effect, as the point estimate for screen time is actually slightly
+higher than that with no screen time. More importantly, the standard
+errors completely dominate any difference between the treatments. Table
+\ref{tab:quality_by_treatment_tab} shows the tabular results for Figure
+\ref{fig:quality_by_treatment_fig}.
 
 \begin{figure}
 \centering
@@ -305,8 +316,20 @@ date in group which received screen time first}
 date in group that received no screen time first}
 \end{figure}
 
-Table \ref{tab:regressions} shows the results of three regressions
-models:
+Figure \ref{fig:quality_by_date_group1_fig} and Figure
+\ref{fig:quality_by_date_group2_fig} show the mean sleep quality by
+dates for the two groups. Recall that group 1 received treatment (screen
+time) in week 1 of the experiment and switched to control (no screen
+time) in week 2. Group 2 had the opposite schedule. Again, the large
+error bars make it hard to draw any sort of conclusion for whether the
+switch in treatment has any effect, but it could be argued that there is
+a slight drop in quality in group 1, after they switch from screen time
+to no screen time. Although still likely due to random noise, this drop
+is probably what primarily drives the treatment point estimate being in
+the opposite direction of the expected effect.
+
+Table \ref{tab:quality_regressions} shows the results of three
+regressions models:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -314,51 +337,240 @@ models:
 \item
   \(quality = \beta_0 + \beta_1 treat\)
 \item
-  \(quality = \beta_0 + \beta_1 treat + \beta_2 hours\)
+  \(quality = \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i\)
 \item
-  \(quality = \beta_0 + \beta_1 treat + \beta_2 hours + \beta_3 id\)
+  \(quality = \beta_0 + \beta_1 treat + \sum_j \delta_j x_j\)
 \end{enumerate}
 
-The covariates refer to treatment, hours slept, and unique indicators
-for each person in the study. As expected, none of them show
-statistically significance of the treatment (screen-time before bed)
-affecting sleep quality. The number of hours slept and the specific
-person has way more effect on sleep quality.
+In model 1, we naively regress on just the treatment variable. This
+yields the 0.628 point effect that was already shown in Table
+\ref{tab:quality_by_treatment_tab}. However, we are not taking into the
+account that multiple entries in the dataset came from the same person.
+
+We assigned a numerical ID to each participant in the study. This
+provides a unique indicator variable for each person and the standard
+errors reported in Table \ref{tab:quality_regressions} are actually
+clustered standard errors based on thsoe IDs. In model 2, we control for
+the fixed effects to each person. This brings down the treatment effect
+(which was already statistically insignificant) even closer to zero.
+
+Recall that the sign-up form for the experiment also contained several
+questions regarding sleep habits. In model 3, we regress on these in
+lieu of the subject IDs. See the pre-experiment survey in the appendix
+for the list of covariates. The self-reported bedtime stands out as a
+variable that is highly statistically significant. We will not draw any
+causal inference from this fact, as we did not randomize subjects'
+bedtimes. It is also important to reiterate that these are not the
+actual observed bed times in the experiment, but the estimated bed time
+that subjects reported in the pre-experiment survey. However, it does
+seem that for this group of people, self-reported late sleepers also
+have higher sleep quality. In addition, we are surprised that whether or
+not a subject shared a bed with a partner did not have even higher
+statistical significance. Unless both people are simultaneously using
+the app, \emph{Sleep Cycle} cannot distinguish movement from one person
+or another. It should be the case that multiple people should make much
+more noise and trick the app into thinking that its user is awake for
+longer than actuality.
 
 \begin{table}[!htbp] \centering 
-  \caption{\label{tab:regressions} Regressions} 
+  \caption{\label{tab:quality_regressions} Regressions, outcome is sleep quality} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}}lccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
  & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{quality} \\ 
+\\[-1.8ex] & \multicolumn{3}{c}{Sleep Quality} \\ 
 \\[-1.8ex] & (1) & (2) & (3)\\ 
 \hline \\[-1.8ex] 
- Treatment (Screen-time) & 0.628 & $-$0.358 & $-$0.545 \\ 
-  & (1.468) & (0.986) & (0.983) \\ 
+ Treatment (Screen-time) & 0.628 & 0.120 & $-$0.394 \\ 
+  & (1.581) & (1.639) & (1.637) \\ 
   & & & \\ 
- Hours Slept &  & 8.014$^{***}$ & 7.889$^{***}$ \\ 
-  &  & (0.396) & (0.397) \\ 
+ Age &  &  & 0.276 \\ 
+  &  &  & (0.206) \\ 
   & & & \\ 
- Subject ID &  &  & 0.139$^{**}$ \\ 
-  &  &  & (0.058) \\ 
+ Male &  &  & 1.376 \\ 
+  &  &  & (3.175) \\ 
   & & & \\ 
- Constant & 70.618$^{***}$ & 14.085$^{***}$ & 13.172$^{***}$ \\ 
-  & (1.071) & (2.888) & (2.893) \\ 
+ Bed time &  &  & 0.402$^{***}$ \\ 
+  &  &  & (0.140) \\ 
+  & & & \\ 
+ Rise time &  &  & 0.587 \\ 
+  &  &  & (1.637) \\ 
+  & & & \\ 
+ Daily caffeine &  &  & $-$1.507$^{*}$ \\ 
+  &  &  & (0.915) \\ 
+  & & & \\ 
+ Workout close to bedtime &  &  & $-$0.641 \\ 
+  &  &  & (2.558) \\ 
+  & & & \\ 
+ Daily electronics use &  &  & $-$0.036 \\ 
+  &  &  & (0.313) \\ 
+  & & & \\ 
+ Electronics stop before bed &  &  & 0.027 \\ 
+  &  &  & (0.107) \\ 
+  & & & \\ 
+ King Size Bed &  &  & 4.117 \\ 
+  &  &  & (3.729) \\ 
+  & & & \\ 
+ Queen Size Bed &  &  & $-$4.652$^{*}$ \\ 
+  &  &  & (2.790) \\ 
+  & & & \\ 
+ Twin Size Bed &  &  & 4.276 \\ 
+  &  &  & (3.541) \\ 
+  & & & \\ 
+ Shares bed &  &  & $-$8.919$^{*}$ \\ 
+  &  &  & (4.757) \\ 
+  & & & \\ 
+ Constant & 70.618$^{***}$ & 71.940$^{***}$ & 58.968$^{***}$ \\ 
+  & (1.564) & (0.819) & (19.061) \\ 
   & & & \\ 
 \hline \\[-1.8ex] 
-Observations & 336 & 336 & 336 \\ 
-R$^{2}$ & 0.001 & 0.551 & 0.559 \\ 
-Adjusted R$^{2}$ & $-$0.002 & 0.549 & 0.555 \\ 
-Residual Std. Error & 13.424 (df = 334) & 9.009 (df = 333) & 8.947 (df = 332) \\ 
-F Statistic & 0.183 (df = 1; 334) & 204.530$^{***}$ (df = 2; 333) & 140.133$^{***}$ (df = 3; 332) \\ 
+Control for user ID & No & Yes & No \\ 
+Observations & 336 & 336 & 326 \\ 
+R$^{2}$ & 0.001 & 0.297 & 0.146 \\ 
+Adjusted R$^{2}$ & $-$0.002 & 0.231 & 0.110 \\ 
+Residual Std. Error & 13.424 (df = 334) & 11.761 (df = 306) & 12.571 (df = 312) \\ 
+F Statistic & 0.183 (df = 1; 334) & 4.460$^{***}$ (df = 29; 306) & 4.087$^{***}$ (df = 13; 312) \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/quality_by_hours_fig-1.pdf}
+\caption{\label{fig:quality_by_hours_fig} Mean sleep quality by hours
+slept}
+\end{figure}
+
+Figure \ref{fig:quality_by_hours_fig} shows that sleep quality is highly
+correlated hours slept. Table \ref{tab:quality_hours_regression} shows
+the strength of this relationship. Since these two variables are so
+predictive of one-another, it may be interesting to also use hours slept
+as an outcome variable.
+
+\begin{table}[!htbp] \centering 
+  \caption{\label{tab:quality_hours_regression} Regression, quality on hours} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & quality \\ 
+\hline \\[-1.8ex] 
+ Hours & 8.268$^{***}$ \\ 
+  & (0.396) \\ 
+  & \\ 
+ Constant & 12.060$^{***}$ \\ 
+  & (2.853) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 466 \\ 
+R$^{2}$ & 0.584 \\ 
+Adjusted R$^{2}$ & 0.583 \\ 
+Residual Std. Error & 9.088 (df = 464) \\ 
+F Statistic & 650.944$^{***}$ (df = 1; 464) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+Thus, we run the anlogous three regression to Table
+\ref{tab:quality_regressions}. Table \ref{tab:hours_regressions} shows
+the results. Again, we see no statistically significant treatment
+effects. However, the bed time coefficient is still significant. It is
+worth investigating this further.
+
+\begin{table}[!htbp] \centering 
+  \caption{\label{tab:hours_regressions} Regressions, outcome is hours slept} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Hours Slept} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Treatment (Screen-time) & 0.123 & 0.088 & 0.036 \\ 
+  & (0.126) & (0.138) & (0.143) \\ 
+  & & & \\ 
+ Age &  &  & 0.045$^{**}$ \\ 
+  &  &  & (0.023) \\ 
+  & & & \\ 
+ Male &  &  & 0.245 \\ 
+  &  &  & (0.313) \\ 
+  & & & \\ 
+ Bed time &  &  & 0.042$^{**}$ \\ 
+  &  &  & (0.018) \\ 
+  & & & \\ 
+ Rise time &  &  & 0.198 \\ 
+  &  &  & (0.197) \\ 
+  & & & \\ 
+ Daily caffeine &  &  & $-$0.074 \\ 
+  &  &  & (0.118) \\ 
+  & & & \\ 
+ Workout close to bedtime &  &  & $-$0.318 \\ 
+  &  &  & (0.233) \\ 
+  & & & \\ 
+ Daily electronics use &  &  & $-$0.0001 \\ 
+  &  &  & (0.033) \\ 
+  & & & \\ 
+ Electronics stop before bed &  &  & 0.005 \\ 
+  &  &  & (0.012) \\ 
+  & & & \\ 
+ King Size Bed &  &  & 0.299 \\ 
+  &  &  & (0.467) \\ 
+  & & & \\ 
+ Queen Size Bed &  &  & $-$0.544 \\ 
+  &  &  & (0.361) \\ 
+  & & & \\ 
+ Twin Size Bed &  &  & 0.984$^{**}$ \\ 
+  &  &  & (0.428) \\ 
+  & & & \\ 
+ Shares bed &  &  & $-$0.900$^{*}$ \\ 
+  &  &  & (0.534) \\ 
+  & & & \\ 
+ Constant & 7.054$^{***}$ & 7.272$^{***}$ & 4.149$^{*}$ \\ 
+  & (0.157) & (0.069) & (2.166) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Control for user ID & No & Yes & No \\ 
+Observations & 336 & 336 & 326 \\ 
+R$^{2}$ & 0.002 & 0.398 & 0.177 \\ 
+Adjusted R$^{2}$ & $-$0.001 & 0.341 & 0.143 \\ 
+Residual Std. Error & 1.243 (df = 334) & 1.009 (df = 306) & 1.149 (df = 312) \\ 
+F Statistic & 0.819 (df = 1; 334) & 6.988$^{***}$ (df = 29; 306) & 5.169$^{***}$ (df = 13; 312) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\hypertarget{non-compliance}{%
+\subsubsection{Non-compliance}\label{non-compliance}}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/days_used-1.pdf}
+\caption{\label{fig:days_used} Number of nights of data submitted by
+each participant}
+\end{figure}
+
+Non-compliance was major issue in this experiment. Beyond not following
+our instructions on electronics useage, many subjects simply did not use
+the app. Figure \ref{fig:days_used} shows the number of nights of data
+that each subject actually submitted. The experiment took place over two
+weeks and ideally we would have received 14 nights of data from each
+person. Clearly this was not the case. The mean number of nights
+submitted was just 11.6 days, with one particpant only using the app for
+2 out of the 14 nights. As an aside, the one subject with 15 nights of
+data used the app twice in one night. The subject went to sleep, woke
+up, and then went to sleep again.
 
 \hypertarget{conclusion}{%
 \subsection{Conclusion}\label{conclusion}}
