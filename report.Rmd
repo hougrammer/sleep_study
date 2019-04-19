@@ -15,10 +15,11 @@ urlcolor: blue
 linkcolor: blue
 header-includes:
   \usepackage{float}
+  \usepackage{booktabs}
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo = F, fig.pos = 'H', fig.height = 4)
+knitr::opts_chunk$set(echo = F, fig.pos = 'H', fig.height = 3.5)
 library(data.table)
 library(magrittr)
 library(ggplot2)
@@ -109,18 +110,18 @@ Figure \ref{fig:quality_histogram} shows the distribution of the sleep quality o
 
 ```{r quality_by_treatment_fig, fig.cap='\\label{fig:quality_by_treatment_fig} Mean sleep quality by treatment'}
 # I'm going to be reusing df2 as a variable name a lot.  I'm too lazy to come up with something more meaningful.
-df2 = df[order(treat), .(mean = mean(quality), sd = sd(quality)/sqrt(.N)), by = treat]
+df2 = df[order(treat), .(mean = mean(quality), se = sd(quality)/sqrt(.N), .N), by = treat]
 df2$label = c('-1 (Baseline)', '0 (No Screen Time)', '1 (Screen Time)')
 ggplot(df2, aes(x=label, y=mean)) + 
     geom_point(size = 3) +
-    geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2) +
+    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.2) +
     labs(x = NULL, y = 'Mean Quality', title = 'Mean Sleep Quality by Treatment')
 ```
 
 ```{r quality_by_treatment_tab, results='asis'}
-df2 = df2[, c(4,2,3)] # reorder columns
+df2 = df2[, c(5,2,3,4)] # reorder columns
 df2$label = c('Baseline', 'No Screen Time', 'Screen Time')
-names(df2) = c('Label', 'Mean', 'St. Err.')
+names(df2) = c('Label', 'Mean', 'St. Err.', 'N')
 stargazer(
     df2, 
     header = F,
@@ -197,7 +198,8 @@ stargazer(
     covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
     dep.var.labels = 'Sleep Quality',
     omit = 'id',
-    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No'))
+    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No')),
+    single.row = T
 )
 ```
 
@@ -245,8 +247,22 @@ stargazer(
     covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
     dep.var.labels = 'Hours Slept',
     omit = 'id',
-    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No'))
+    add.lines = list(c('Control for user ID', 'No', 'Yes', 'No')),
+    single.row = T
 )
+```
+
+Figure \ref{fig:bed_time_fig} shows an interesting finding.  During baseline collection, it appears that the subjects slept slightly later than during the experiment.  Since we obviously cannot observe other people who did not participate in the experiment, we refrain from drawing any causal conclusions.  In any case, it is apparent that the actual treatment had little effect on bed time.
+
+```{r bed_time_fig, fig.cap='\\label{fig:bed_time_fig} Bed time by treatment'}
+df2 = df %>%
+    .[!is.na(bed_time), .(mean = mean(bed_time), se = sd(bed_time)/sqrt(.N), .N), by = treat] %>%
+    .[order(treat)]
+df2$label = c('-1 (Baseline)', '0 (No Screen Time)', '1 (Screen Time)')
+ggplot(df2, aes(x=label, y=mean)) + 
+    geom_point(size = 3) +
+    geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.2) +
+    labs(x = NULL, y = 'Minutes Since Midnight', title = 'Bed Time by Treatment')
 ```
 
 ## Non-compliance
@@ -266,3 +282,4 @@ Non-compliance was major issue in this experiment.  Beyond not following our ins
 Through our findings and analysis of the data we reject our hypothesis that there is statistical significance between thirty minutes of screen time before going to bed and sleep quality. Additionally we fail to reject the null hypothesis which suggests that there is no statistical significance between screen time thirty minutes before going to bed and dleep quality.
 
 This experiment was too small to demonstrate any statistically significant treatment effect.  It would be interesting to repeat this test with a much larger population.
+

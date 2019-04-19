@@ -16,10 +16,28 @@ df = df %>%
     # drop 'S' in id
     .[, id := sapply(id, function(x) substr(as.character(x), 2, 4))] %>%
     
-    # convert time to hours
+    # convert times to hours
     .[, hours := sapply(time, function(x) {
         s = unlist(strsplit(as.character(x), ':'))
         as.numeric(s[[1]]) + as.numeric(s[[2]])/60
+    })] %>%
+    
+    # convert bed and rise times to hours since midnight
+    .[, bed_time := sapply(start, function(x) {
+        s1 = unlist(strsplit(x, ' '))[2]
+        if (is.na(s1)) return(NA)
+        s2 = unlist(strsplit(s1, ':'))
+        
+        h = as.numeric(s2[[1]])
+        if (h > 12) h = h - 24
+        m = as.numeric(s2[[2]])
+        h*60 + m
+    })] %>%
+    .[, rise_time := sapply(end, function(x) {
+        s1 = unlist(strsplit(x, ' '))[2]
+        if (is.na(s1)) return(NA)
+        s2 = unlist(strsplit(s1, ':'))
+        as.numeric(s2[[1]])*60 + as.numeric(s2[[2]])
     })] %>%
     
     # convert start and end to dates
