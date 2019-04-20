@@ -77,24 +77,24 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Sleep Study Experiment}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-\subtitle{W241 Final Project}
+  \subtitle{W241 Final Project}
   \author{David Hou \\ Ravi Ayyappan \\ Ahsen Qamar}
-  \preauthor{\centering\large\emph}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{20 April 2019}
+    \date{20 April 2019}
 
 \usepackage{float} \usepackage{booktabs}
 
 \begin{document}
 \maketitle
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 The importance of good sleep habits is emphasized frequently in
 contemporary advice. One aspect of good sleep hygiene is the avoidance
@@ -106,15 +106,13 @@ as a result of screen-time before bed. Due to our limited expertise and
 resources for studying sleep science, we will perform the measurement
 using a mobile app.
 
-\hypertarget{research-question}{%
-\section{Research Question}\label{research-question}}
+\section{Research Question}\label{research-question}
 
 \emph{Does using electronics with a screen thirty minutes prior to sleep
 have a statistically significant effect on the sleep quality as measured
 by a mobile app?}
 
-\hypertarget{hypothesis}{%
-\section{Hypothesis}\label{hypothesis}}
+\section{Hypothesis}\label{hypothesis}
 
 We hypothesize that that use of an electronic device with a screen for
 at least thirty minutes prior to going to sleep degrades the overall
@@ -126,8 +124,7 @@ As a correlary, we investigate whether refraining from electronics usage
 thirty minutes prior to going to sleep improves sleep quality for that
 night.
 
-\hypertarget{experiment-design}{%
-\section{Experiment Design}\label{experiment-design}}
+\section{Experiment Design}\label{experiment-design}
 
 The aforementioned mobile app is called \href{www.sleepcycle.com}{Sleep
 Cycle} and utilizes the phone's microphone to measure a user's sleep
@@ -223,8 +220,7 @@ offered subjects some small monetary compensation and emphasized
 prioritization of honesty of compliance in reporting data. Even so, we
 can never be sure of whether subjects followed instructions.
 
-\hypertarget{experiment-deviations}{%
-\subsection{Experiment Deviations}\label{experiment-deviations}}
+\subsection{Experiment Deviations}\label{experiment-deviations}
 
 Between the closing the sign-up survey, we asked all respondents to
 begin using the app in order to establish baseline data and help the app
@@ -245,11 +241,9 @@ were not aware of our own randomization a priori, we obviously had more
 knowledge of the experiment than other subjects. We will present the
 effect of being an experimenter later.
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+\section{Results}\label{results}
 
-\hypertarget{data-cleaning}{%
-\subsection{Data Cleaning}\label{data-cleaning}}
+\subsection{Data Cleaning}\label{data-cleaning}
 
 We made as little modification to the raw data as possible, but a few
 exceptions exist. We decided to omit entries for which the subject slept
@@ -266,11 +260,9 @@ such, we excluded their results. Note that these subjects are not
 necessarily attriters, as we could not collect data from treatment or
 control.
 
-\hypertarget{analysis}{%
-\subsection{Analysis}\label{analysis}}
+\subsection{Analysis}\label{analysis}
 
-\hypertarget{experiment-power}{%
-\subsubsection{Experiment Power}\label{experiment-power}}
+\subsubsection{Experiment Power}\label{experiment-power}
 
 Before presenting the analysis, it should be noted that this experiment
 is very underpowered. It was difficult to recruit a significant number
@@ -279,8 +271,7 @@ over several weeks. For our \texttt{n} size of 29, to see a small effect
 size (Cohen's \texttt{d\ =\ 0.2}) at the 0.05 significance level, we
 only have a power of about 0.12.
 
-\hypertarget{sleep-quality}{%
-\subsubsection{Sleep Quality}\label{sleep-quality}}
+\subsubsection{Sleep Quality}\label{sleep-quality}
 
 \begin{figure}
 \centering
@@ -385,7 +376,7 @@ questions regarding sleep habits. In model 3, we regress on these in
 lieu of the subject IDs. See the pre-experiment survey in the appendix
 for the list of covariates. Interestingly, the treatment effect now
 flips to be the hypothesized sign. We don't emphasize this flip any
-further, as we are still far from statstical significance.
+further, as we are still far from statistical significance.
 
 The self-reported bedtime stands out as a variable that is has a
 significant coefficient. We will not draw any causal inference from this
@@ -439,8 +430,7 @@ F Statistic & 0.183 (df = 1; 334) & 4.460$^{***}$ (df = 29; 306) & 4.424$^{***}$
 \end{tabular} 
 \end{table}
 
-\hypertarget{hours-slept}{%
-\subsubsection{Hours Slept}\label{hours-slept}}
+\subsubsection{Hours Slept}\label{hours-slept}
 
 \begin{figure}
 \centering
@@ -544,8 +534,7 @@ F Statistic & 0.819 (df = 1; 334) & 6.988$^{***}$ (df = 29; 306) & 5.555$^{***}$
 \end{tabular} 
 \end{table}
 
-\hypertarget{bed-time}{%
-\subsubsection{Bed Time}\label{bed-time}}
+\subsubsection{Bed Time}\label{bed-time}
 
 Figure \ref{fig:bed_time_fig} shows a finding that is maybe interesting.
 During baseline collection, it appears that the subjects slept slightly
@@ -560,8 +549,7 @@ actual treatment had little effect on bed time.
 \caption{\label{fig:bed_time_fig} Bed time by treatment}
 \end{figure}
 
-\hypertarget{experimenters-effect}{%
-\subsubsection{Experimenter's Effect}\label{experimenters-effect}}
+\subsubsection{Experimenter's Effect}\label{experimenters-effect}
 
 Finally, we present the effect of being an experimenter in the results.
 Recall that we included ourselves in this study. Table
@@ -604,8 +592,7 @@ F Statistic (df = 3; 332) & 1.255 & 0.974 \\
 \end{tabular} 
 \end{table}
 
-\hypertarget{non-compliance}{%
-\subsection{Non-compliance}\label{non-compliance}}
+\subsection{Non-compliance}\label{non-compliance}
 
 \begin{figure}
 \centering
@@ -625,8 +612,63 @@ for 2 out of the 14 nights. As an aside, the one subject with 15 nights
 of data used the app twice in one night. The subject went to sleep, woke
 up, and then went to sleep again.
 
-\hypertarget{conclusion}{%
-\section{Conclusion}\label{conclusion}}
+\section{Challenges}\label{challenges}
+
+Throughout the course of this experiment we encountered challenges both
+expected and unexpected. We had hoped that incentivizing participants
+with a \$10 gift card would help recruitment but it did not. Right
+before starting the experiment we had some participants dropout
+resulting in an even smaller group for our experiment. It would be a
+good idea to invest some time in understanding the best way to recruit
+commited participants.
+
+Another fact that we were made painfully aware of is that people do what
+people want and they do not like being told what to do. The figure below
+shows self-reported anonymized non-compliance from the participants:
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{img/compliance} 
+
+}
+
+\caption{Experiment Non-compliance}\label{fig:noncompliance}
+\end{figure}
+
+We see from Figure \ref{fig:noncompliance} that we had two participants
+that were not able to follow the treatment for all seven days. Majority
+of the participants missed around one to two days. Reflecting on these
+numbers from an experiment point of view leads us to few ways the
+experiment could have been conducted better to reduce non-compliance. We
+could have sent nightly reminders to participants reminding them to
+follow treatment and control. However, how would this apply across
+participants who may have different bedtimes. We could have filtered
+users with abnormal sleep cycles (i.e.~medical residents) out of the
+survey. If this experiment were repeated special attention needs to be
+paid to who we are recruiting.
+
+Towards the end of the experiment questions also came up regarding our
+decision to use the \emph{Sleep Cycle} app. When it came to analyze the
+data we saw that the app reports higher sleep quality numbers
+proportional to time spent in bed. Additionally, the Android version of
+the app was lacking the ability to export data and had to reported
+manually from the participants. The \emph{Sleep Cycle} app uses audio
+analysis to discern and generate a sleep quality number. There is no way
+to no way to know for sure if this is the best method to measure sleep
+quality. Another alternative is this product created by \emph{Withings}:
+\url{https://www.withings.com/us/en/sleep\#}. If this experiment were to
+be repeated we would request an appropriate budget to acquire the
+appropriate tools needed to accurately measure sleep quality.
+
+There is a strong possibility that our experiment suffered from the
+spillover effect. A decent amount of our participants were recruited
+from word of mouth or relatives of those conducting the experiment. No
+explicit instructions were sent to individuals to not share whether they
+were assigned to treatment (screen time) or control (no screen time).
+There is no way to know for sure but a bigger pool of participants and
+more explicit instructions would greatly reduce the risk.
+
+\section{Conclusion}\label{conclusion}
 
 Through our findings and analysis of the data we fail to reject the null
 hypothesis. This experiment was likely too small to demonstrate any

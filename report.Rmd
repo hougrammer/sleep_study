@@ -186,7 +186,7 @@ In model 1, we naively regress on just the treatment variable.  This yields the 
 
 We assigned a numerical ID to each participant in the study.  This provides a unique indicator variable for each person and the standard errors reported in Table \ref{tab:quality_regressions} are actually clustered standard errors based on those IDs.  In model 2, we control for the fixed effects to each person.  This brings down the treatment effect (which was already statistically insignificant) even closer to zero.
 
-Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  Interestingly, the treatment effect now flips to be the hypothesized sign.  We don't emphasize this flip any further, as we are still far from statstical significance.
+Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  Interestingly, the treatment effect now flips to be the hypothesized sign.  We don't emphasize this flip any further, as we are still far from statistical significance.
 
 The self-reported bedtime stands out as a variable that is has a significant coefficient.  We will not draw any causal inference from this fact, as we did not randomize subjects' bedtimes.  It is also important to reiterate that these are not the actual observed bed times in the experiment, but the estimated bed time that subjects reported in the pre-experiment survey.  However, it does seem that for this group of people, self-reported late sleepers also have higher sleep quality.
 
@@ -326,6 +326,22 @@ ggplot(df2, aes(id, N)) +
 ```
 
 Non-compliance was major issue in this experiment.  Beyond not following our instructions on electronics usage, many subjects simply did not use the app.  Figure \ref{fig:days_used} shows the number of nights of data that each subject actually submitted.  The experiment took place over two weeks and ideally we would have received 14 nights of data from each person.  Clearly this was not the case.  The mean number of nights submitted was just 11.6 days, with one participant only using the app for 2 out of the 14 nights.  As an aside, the one subject with 15 nights of data used the app twice in one night.  The subject went to sleep, woke up, and then went to sleep again.  
+
+# Challenges
+
+Throughout the course of this experiment we encountered challenges both expected and unexpected. We had hoped that incentivizing participants with a $10 gift card would help recruitment but it did not. Right before starting the experiment we had some participants dropout resulting in an even smaller group for our experiment. It would be a good idea to invest some time in understanding the best way to recruit commited participants. 
+
+Another fact that we were made painfully aware of is that people do what people want and they do not like being told what to do. The figure below shows self-reported anonymized non-compliance from the participants:
+
+```{r noncompliance, out.width='100%', fig.align='center', fig.cap='Experiment Non-compliance'}
+knitr::include_graphics('img/compliance.PNG')
+```
+
+We see from Figure \ref{fig:noncompliance} that we had two participants that were not able to follow the treatment for all seven days. Majority of the participants missed around one to two days. Reflecting on these numbers from an experiment point of view leads us to few ways the experiment could have been conducted better to reduce non-compliance. We could have sent nightly reminders to participants reminding them to follow treatment and control. However, how would this apply across participants who may have different bedtimes. We could have filtered users with abnormal sleep cycles (i.e. medical residents) out of the survey. If this experiment were repeated special attention needs to be paid to who we are recruiting.
+
+Towards the end of the experiment questions also came up regarding our decision to use the _Sleep Cycle_ app. When it came to analyze the data we saw that the app reports higher sleep quality numbers proportional to time spent in bed. Additionally, the Android version of the app was lacking the ability to export data and had to reported manually from the participants. The _Sleep Cycle_ app uses audio analysis to discern and generate a sleep quality number. There is no way to no way to know for sure if this is the best method to measure sleep quality. Another alternative is this product created by _Withings_: https://www.withings.com/us/en/sleep#. If this experiment were to be repeated we would request an appropriate budget to acquire the appropriate tools needed to accurately measure sleep quality.
+
+There is a strong possibility that our experiment suffered from the spillover effect. A decent amount of our participants were recruited from word of mouth or relatives of those conducting the experiment. No explicit instructions were sent to individuals to not share whether they were assigned to treatment (screen time) or control (no screen time). There is no way to know for sure but a bigger pool of participants and more explicit instructions would greatly reduce the risk. 
 
 # Conclusion
 
