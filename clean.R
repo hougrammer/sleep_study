@@ -56,7 +56,10 @@ df = df %>%
     .[hours > 1, ] %>%
     
     # convert treat to -1, 0, 1 (-1 feels more conventional)
-    .[treat == 2, treat := -1]
+    .[treat == 2, treat := -1] %>%
+    
+    # add indicator for Ahsen, David, Ravi
+    .[, experimenter := id %in% c(26, 27, 28)]
 
 # join with cleaned initial responses
 df = df[resp_init, on = 'email']

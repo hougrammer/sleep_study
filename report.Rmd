@@ -26,25 +26,26 @@ library(ggplot2)
 library(stargazer)
 library(pwr)
 library(sandwich)
+library(multiwayvcov)
 ```
 
 # Introduction
 
-The importance of good sleep habits is emphasized quite often in contemporary advice.  One aspect of good sleep hygiene is the avoidance of electronic devices with backlit screens prior to bed.  The light from these screens causes the brain to stay under the assumption of daytime, inhibiting the production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed.  Due to our limited expertise and resources for studying sleep science, we will perform the measurement using a mobile app.
+The importance of good sleep habits is emphasized frequently in contemporary advice.  One aspect of good sleep hygiene is the avoidance of electronic devices with backlit screens prior to bed.  Light from screens can cause the brain to stay under the assumption of daytime, inhibiting  production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed.  Due to our limited expertise and resources for studying sleep science, we will perform the measurement using a mobile app.
 
 # Research Question
 
-_Does using an electronic device with a screen, thirty minutes prior to going to bed, have any statistically significant effect on the sleep quality for that individual for that specific night?_
+_Does using electronics with a screen thirty minutes prior to sleep have a statistically significant effect on the sleep quality as measured by a mobile app?_
 
 # Hypothesis
 
-Our team hypothesizes that that use of an electronic device with a screen, at least thirty minutes prior to going to bed, degrades the overall sleep quality for that night. The null hypothesis would correspondingly say that there is no statistical significance between screen time thirty minutes before going to bed and sleep quality.
+We hypothesize that that use of an electronic device with a screen for at least thirty minutes prior to going to sleep degrades the overall sleep quality for that night. The null hypothesis would correspondingly say that there is no statistical significance between screen time thirty minutes before going to bed and sleep quality.
 
-A secondary question we will analyze is whether not using an electronic device thirty minutes prior to going to bed improves sleep quality for that night.
+As a correlary, we investigate whether refraining from electronics usage thirty minutes prior to going to sleep improves sleep quality for that night.
 
 # Experiment Design
 
-The app used is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles overnight.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  Figure \ref{fig:example_night} shows an example of the output from one night's data.
+The aforementioned mobile app is called [Sleep Cycle](www.sleepcycle.com) and utilizes the phone's microphone to measure a user's sleep cycles while in bed.  It is primarily advertised for its alarm clock feature, which attempts to wake a user in the lightest phase of sleep in a preset time interval.  Each morning, the app displays a graph of the user's sleep cycles in the previous night and some relevant statistics.  Figure \ref{fig:example_night} shows an example of the output from one night's data.
 
 ```{r example_night, out.width='25%', fig.align='center', fig.cap='Example night'}
 knitr::include_graphics('img/example_night.PNG')
@@ -57,13 +58,13 @@ One of these statistics is a "Sleep Quality" number, which is the principle outc
 3. Consistency of the sleep.
 4. Amount of times where the app registered you as fully awake.
 
-Of the four factors, users generally only have direct control over the first one.  In order to be less intrusive, we did not control the amount of time that users spend in bed, but we did instruct subjects to try to sleep at regular hours every night.  The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect.  The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
+Of the four factors, users generally only have direct control over the first one.  We did not control the amount of time that users spend in bed, but we did instruct subjects to try to sleep at regular hours every night.  As will be discussed later, compliance is a major issue in an experiment of this sort.  We felt that tightly controlling the amount of time in bed would exacerbate the problem.  The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect.  The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
 
-The experiment took place over two weeks, from March 23 to April 5 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demographic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
+The experiment took place over two weeks, from March 23 to April 5 of 2019.  Saturday was chosen as the start day of the week because it was feared that instructions to change sleep habits in the middle of the week might be ignored.  We recruited 35 people for the study using a Google survey, consisting of classmates, friends, and family.  In addition to asking for contact and demographic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions were mixed in among other questions such as workout habits and alcohol consumption.  See Appendix for screenshots of the survey.  Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
 
 All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix).  When instructing subjects to use electronics prior to bed, we did not mandate any specific activity, as we felt it would increase non-compliance on an already-intrusive study.  We only specified that users should use some sort of electronic device with a backlit screen for 30 minutes immediately before bedtime.  Similarly, we did not ask subjects in the other group to perform anything in lieu of electronic usage.  These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
 
-Subjects were assigned randomly to two groups, with group 1 receiving treatment (screen-time before bed) during the first week and group 2 receiving control (no screen-time before bed).  After the first week, subjects were instructed to swap to the opposite activity of what they were assigned to initially.  The swapping design allows us to perform within-subject comparisons while also leaving time for treatment effects to manifest themselves.  With the group that received treatment first, we are also able to perform some analysis on persistence effects.  Note that subjects were not informed of the instruction swap ahead of time, so we do not expect any anticipation effects.
+Subjects were assigned randomly to two groups, with group 1 receiving treatment (screen-time before bed) during the first week and group 2 receiving control (no screen-time before bed).  After the first week, subjects were instructed to swap to the opposite activity of what that which they were initially assigned.  This swapping design allows us to perform within-subject comparisons while also leaving time for treatment effects to manifest themselves.  With the group that received treatment first, we are also able to perform some analysis on persistence effects.  Note that subjects were not informed of the instruction swap ahead of time, so we do not expect any anticipation effects.
 
 The nature of experiment requires effort from subjects in both treatment and control.  That is, for people who normally use electronic devices before bed, the request to refrain from usage constitutes a significant change in pre-sleep ritual; for people who normally avoid electronics before bed, the opposite is true.  Therefore, we are concerned with two-sided non-compliance, which is especially difficult to measure in this experiment because people are unlikely to honestly report when they have deviated from our instructions.  To help combat this somewhat, we offered subjects some small monetary compensation and emphasized prioritization of honesty of compliance in reporting data.  Even so, we can never be sure of whether subjects followed instructions.
 
@@ -71,7 +72,7 @@ The nature of experiment requires effort from subjects in both treatment and con
 
 Between the closing the sign-up survey, we asked all respondents to begin using the app in order to establish baseline data and help the app calibrate (the website claims that the app becomes more accurate over time).  Sleep habits during this baseline usage were not closely controlled or monitored, as each subject signed up for the experiment at different dates.  However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export.  At this time, we learned that Android users could not perform the export due to missing functionality in the app.  As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
 
-After closing the sign-up survey, we decided to also included ourselves as subjects in the experiment.  This was to slightly raise the number of subjects and out of curiosity for the effects on ourselves.  Though we were not aware of our own randomization a priori, we obviously had more knowledge of the experiment than other subjects, so we will analyze our own data with special care.
+After closing the sign-up survey, we decided to also included ourselves as subjects in the experiment.  This was to slightly raise the number of subjects and out of curiosity for the effects on ourselves.  Though we were not aware of our own randomization a priori, we obviously had more knowledge of the experiment than other subjects.  We will present the effect of being an experimenter later.
 
 # Results
 
@@ -79,6 +80,7 @@ After closing the sign-up survey, we decided to also included ourselves as subje
 df = data.table(read.csv('data/cleaned.csv', stringsAsFactors = F))
 df = df %>%
     .[, treat := as.factor(treat)] %>%
+    .[, id := as.factor(id)] %>%
     .[, start_date := as.Date(start_date)] %>%
     .[, end_date := as.Date(end_date)]
 ```
@@ -91,11 +93,14 @@ Of the 38 people who originally signed up for the study, only 29 people actually
 
 ## Analysis
 
+### Experiment Power
 ```{r, include=FALSE}
 pwr.t.test(n = 29, d = .2, sig.level = 0.05)
 ```
 
 Before presenting the analysis, it should be noted that this experiment is very underpowered.  It was difficult to recruit a significant number of people who would agree to have their sleep monitored and controlled over several weeks.  For our `n` size of 29, to see a small effect size (Cohen's `d = 0.2`) at the 0.05 significance level, we only have a power of about 0.12.
+
+### Sleep Quality
 
 ```{r quality_histogram, fig.cap='\\label{fig:quality_histogram} Quality histogram'}
 m = mean(df$quality)
@@ -106,7 +111,7 @@ ggplot(df, aes(x=quality)) +
     labs(title = 'Quality Histogram', x = 'Quality', y = 'Count')
 ```
 
-Figure \ref{fig:quality_histogram} shows the distribution of the sleep quality over the entire experiment.  This includes data from the baseline and actual experiment.  We see a slight left skew, even after removing the entries with fewer than one hour of sleep.  There is also a slight build up at 100 due to that being the maximum number that the app reports.  We do not believe that the peaks around 70 and 80 are special.
+Figure \ref{fig:quality_histogram} shows the distribution of the sleep quality over the entire experiment.  This includes data from the baseline and actual experiment.  We see a slight left skew, even after removing the entries with fewer than one hour of sleep.  There is also a slight build up at 100 due to that being the maximum number that the app reports.  We do not believe that the peaks around 70 and 80 are noteworthy.
 
 ```{r quality_by_treatment_fig, fig.cap='\\label{fig:quality_by_treatment_fig} Mean sleep quality by treatment'}
 # I'm going to be reusing df2 as a variable name a lot.  I'm too lazy to come up with something more meaningful.
@@ -130,9 +135,9 @@ stargazer(
     title = '\\label{tab:quality_by_treatment_tab} Mean sleep quality by treatment')
 ```
 
-Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  The reported error bars are standard error for each time period.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  We did not tightly control baseline data and not every subject provided it.
+Figure \ref{fig:quality_by_treatment_fig} shows the sleep quality, averaged over the respective time periods, for each treatment assignment.  The reported error bars are standard errors for each time period.  As mentioned above, the baseline data was collected in the time between subjects signing up and the experiment officially starting.  Recall that that we did not tightly control baseline data and not every subject provided it.
 
-It is already clear that our experiment will not show the hypothesized effect, as the point estimate for screen time is actually slightly higher than that with no screen time.  More importantly, the standard errors completely dominate any difference between the treatments.  Table \ref{tab:quality_by_treatment_tab} shows the tabular results for Figure \ref{fig:quality_by_treatment_fig}.
+It is already clear that the experiment will not show the hypothesized effect, as the point estimate for screen time is actually slightly higher than that with no screen time.  More importantly, the standard errors completely dominate any difference between the treatments.  Table \ref{tab:quality_by_treatment_tab} shows the tabular results for Figure \ref{fig:quality_by_treatment_fig}.
 
 ```{r quality_by_date_group1_fig, fig.cap='\\label{fig:quality_by_date_group1_fig} Mean sleep quality by date in group which received screen time first', warning=FALSE}
 
@@ -170,23 +175,30 @@ Figure \ref{fig:quality_by_date_group1_fig} and Figure \ref{fig:quality_by_date_
 
 Table \ref{tab:quality_regressions} shows the results of three regressions models:  
 
-1. $quality = \beta_0 + \beta_1 treat$
-2. $quality = \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i$
-3. $quality = \beta_0 + \beta_1 treat + \sum_j \delta_j x_j$
-
+$$
+\begin{aligned}
+    quality &= \beta_0 + \beta_1 treat \\\\
+    quality &= \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i \\\\
+    quality &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j \\
+\end{aligned}
+$$
 In model 1, we naively regress on just the treatment variable.  This yields the 0.628 point effect that was already shown in Table \ref{tab:quality_by_treatment_tab}.  However, we are not taking into the account that multiple entries in the dataset came from the same person.
 
 We assigned a numerical ID to each participant in the study.  This provides a unique indicator variable for each person and the standard errors reported in Table \ref{tab:quality_regressions} are actually clustered standard errors based on those IDs.  In model 2, we control for the fixed effects to each person.  This brings down the treatment effect (which was already statistically insignificant) even closer to zero.
 
-Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  The self-reported bedtime stands out as a variable that is highly statistically significant.  We will not draw any causal inference from this fact, as we did not randomize subjects' bedtimes.  It is also important to reiterate that these are not the actual observed bed times in the experiment, but the estimated bed time that subjects reported in the pre-experiment survey.  However, it does seem that for this group of people, self-reported late sleepers also have higher sleep quality.  In addition, we are surprised that whether or not a subject shared a bed with a partner did not have even higher statistical significance.  Unless both people are simultaneously using the app, *Sleep Cycle* cannot distinguish movement from one person or another.  It should be the case that multiple people should make much more noise and trick the app into thinking that its user is awake for longer than actuality.
+Recall that the sign-up form for the experiment also contained several questions regarding sleep habits.  In model 3, we regress on these in lieu of the subject IDs.  See the pre-experiment survey in the appendix for the list of covariates.  Interestingly, the treatment effect now flips to be the hypothesized sign.  We don't emphasize this flip any further, as we are still far from statstical significance.
+
+The self-reported bedtime stands out as a variable that is has a significant coefficient.  We will not draw any causal inference from this fact, as we did not randomize subjects' bedtimes.  It is also important to reiterate that these are not the actual observed bed times in the experiment, but the estimated bed time that subjects reported in the pre-experiment survey.  However, it does seem that for this group of people, self-reported late sleepers also have higher sleep quality.
+
+The other significant coefficient is the one associated with sharing a bed.  We are not surprised by this finding.  Unless both people are simultaneously using the app, *Sleep Cycle* cannot distinguish movement from one person or another.  It should be the case that multiple people should make much more noise and trick the app into thinking that its user is awake for longer than actuality.
 
 ```{r}
 m1 = df[treat %in% c(0,1), lm(quality ~ treat)]
 m2 = df[treat %in% c(0,1), lm(quality ~ treat + as.factor(id))]
-m3 = df[treat %in% c(0,1), lm(quality ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + electronics_stop_minutes_before_bed + bed_size + (bed_share=='Yes'))]
-se1 = sqrt(diag(vcovCL(m1, cluster = df[treat %in% c(0,1), id])))
-se2 = sqrt(diag(vcovCL(m2, cluster = df[treat %in% c(0,1), id])))
-se3 = sqrt(diag(vcovCL(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
+m3 = df[treat %in% c(0,1) & id != 24, lm(quality ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + bed_size + (bed_share=='Yes'))]
+se1 = sqrt(diag(cluster.vcov(m1, cluster = df[treat %in% c(0,1), id])))
+se2 = sqrt(diag(cluster.vcov(m2, cluster = df[treat %in% c(0,1), id])))
+se3 = sqrt(diag(cluster.vcov(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
 ```
 
 ```{r quality_regressions, results='asis'}
@@ -195,13 +207,15 @@ stargazer(
     header = F,
     se = list(se1, se2, se3),
     title = '\\label{tab:quality_regressions} Regressions, outcome is sleep quality',
-    covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
+    covariate.labels = c('Treatment', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout', 'Daily screen', 'King size bed', 'Queen size bed', 'Twin size bed', 'Shares bed'), 
     dep.var.labels = 'Sleep Quality',
     omit = 'id',
     add.lines = list(c('Control for user ID', 'No', 'Yes', 'No')),
     single.row = T
 )
 ```
+
+### Hours Slept
 
 ```{r quality_by_hours_fig, fig.cap='\\label{fig:quality_by_hours_fig} Mean sleep quality by hours slept'}
 ggplot(df, aes(hours, quality)) + 
@@ -210,7 +224,7 @@ ggplot(df, aes(hours, quality)) +
     labs(x = 'Hours', y = 'Quality', title = 'Sleep Quality by Hours Slept')
 ```
 
-Figure \ref{fig:quality_by_hours_fig} shows that sleep quality is highly correlated hours slept.  Table \ref{tab:quality_hours_regression} shows the strength of this relationship.  Since these two variables are so predictive of one-another, it may be interesting to also use hours slept as an outcome variable.
+Figure \ref{fig:quality_by_hours_fig} shows that sleep quality is highly correlated hours slept.  Table \ref{tab:quality_hours_regression} shows the strength of this relationship.  Since these two variables are so predictive of one-another, it may be interesting to also use hours slept as an outcome variable.  Note that we did not include hours slept as a covariate in the previous section because it was measured post-treatment and would be a bad control if included.
 
 ```{r}
 m1 = df[, lm(quality ~ hours)]
@@ -227,15 +241,27 @@ stargazer(
 )
 ```
 
-Thus, we run the analogous three regression to Table \ref{tab:quality_regressions}.  Table \ref{tab:hours_regressions} shows the results.  Again, we see no statistically significant treatment effects.  However, the bed time coefficient is still significant.  It is worth investigating this further.
+Thus, we run the analogous three regression to Table \ref{tab:quality_regressions}:
+
+$$
+\begin{aligned}
+    hours &= \beta_0 + \beta_1 treat \\\\
+    hours &= \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i \\\\
+    hours &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j \\
+\end{aligned}
+$$
+
+Table \ref{tab:hours_regressions} shows the results.  Again, we see no statistically significant treatment effects, but find that several more of the covariates are now significant.  Note that treatment seems to increase hours slept, regardless of other controls.  This is likely the reason we are unable to find the hypothesized effect in sleep quality.  Ideally, we would have been able to tightly control the amount of time each subject spent in bed.
+
+Since the coefficient on estimated daily bed time is still significant, we investigate the effect of treatment on actual observed bed times.
 
 ```{r}
 m1 = df[treat %in% c(0,1), lm(hours ~ treat)]
-m2 = df[treat %in% c(0,1), lm(hours ~ treat + as.factor(id))]
-m3 = df[treat %in% c(0,1), lm(hours ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + electronics_stop_minutes_before_bed + bed_size + (bed_share=='Yes'))]
-se1 = sqrt(diag(vcovCL(m1, cluster = df[treat %in% c(0,1), id])))
-se2 = sqrt(diag(vcovCL(m2, cluster = df[treat %in% c(0,1), id])))
-se3 = sqrt(diag(vcovCL(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
+m2 = df[treat %in% c(0,1), lm(hours ~ treat + id)]
+m3 = df[treat %in% c(0,1) & id != 24, lm(hours ~ treat + age + gender + bed_time_24 + rise_time_24 + caffeine + workout_1hr_before_bed + electronics_daily_hours + bed_size + (bed_share=='Yes'))]
+se1 = sqrt(diag(cluster.vcov(m1, cluster = df[treat %in% c(0,1), id])))
+se2 = sqrt(diag(cluster.vcov(m2, cluster = df[treat %in% c(0,1), id])))
+se3 = sqrt(diag(cluster.vcov(m3, cluster = df[treat %in% c(0,1) & id != 24, id])))
 ```
 
 ```{r hours_regressions, results='asis'}
@@ -244,7 +270,7 @@ stargazer(
     header = F,
     se = list(se1, se2, se3),
     title = '\\label{tab:hours_regressions} Regressions, outcome is hours slept',
-    covariate.labels = c('Treatment (Screen-time)', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout close to bedtime', 'Daily electronics use', 'Electronics stop before bed', 'King Size Bed', 'Queen Size Bed', 'Twin Size Bed', 'Shares bed'), 
+    covariate.labels = c('Treatment', 'Age', 'Male', 'Bed time', 'Rise time', 'Daily caffeine', 'Workout', 'Daily screen', 'King size bed', 'Queen size bed', 'Twin size bed', 'Shares bed'), 
     dep.var.labels = 'Hours Slept',
     omit = 'id',
     add.lines = list(c('Control for user ID', 'No', 'Yes', 'No')),
@@ -252,7 +278,9 @@ stargazer(
 )
 ```
 
-Figure \ref{fig:bed_time_fig} shows an interesting finding.  During baseline collection, it appears that the subjects slept slightly later than during the experiment.  Since we obviously cannot observe other people who did not participate in the experiment, we refrain from drawing any causal conclusions.  In any case, it is apparent that the actual treatment had little effect on bed time.
+### Bed Time
+
+Figure \ref{fig:bed_time_fig} shows a finding that is maybe interesting.  During baseline collection, it appears that the subjects slept slightly later than during the experiment.  Since we obviously cannot observe other people who did not participate in the experiment, we refrain from drawing any causal conclusions.  In any case, it is apparent that the actual treatment had little effect on bed time.
 
 ```{r bed_time_fig, fig.cap='\\label{fig:bed_time_fig} Bed time by treatment'}
 df2 = df %>%
@@ -263,6 +291,28 @@ ggplot(df2, aes(x=label, y=mean)) +
     geom_point(size = 3) +
     geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width=.2) +
     labs(x = NULL, y = 'Minutes Since Midnight', title = 'Bed Time by Treatment')
+```
+
+### Experimenter's Effect
+
+Finally, we present the effect of being an experimenter in the results.  Recall that we included ourselves in this study.  Table \ref{tab:experimenter_regression} shows that knowing about the details of the study did not seem to have any significant effect on the outcome variables.
+
+```{r}
+m1 = df[treat %in% c(0,1), lm(quality ~ treat + treat*experimenter)]
+m2 = df[treat %in% c(0,1), lm(hours ~ treat + treat*experimenter)]
+se1 = sqrt(diag(cluster.vcov(m1, cluster = df[treat %in% c(0,1), id])))
+se2 = sqrt(diag(cluster.vcov(m2, cluster = df[treat %in% c(0,1), id])))
+```
+
+```{r experimenter_regression, results='asis'}
+stargazer(
+    m1, m2,
+    header = F,
+    se = list(se1, se2),
+    title = '\\label{tab:experimenter_regression} Regressions, effect of being an experimenter',
+    covariate.labels = c('Treatment', 'Experimenter', 'Treatment*Experimenter'), 
+    dep.var.labels = c('Sleep quality', 'Hours slept')
+)
 ```
 
 ## Non-compliance
@@ -279,7 +329,5 @@ Non-compliance was major issue in this experiment.  Beyond not following our ins
 
 # Conclusion
 
-Through our findings and analysis of the data we reject our hypothesis that there is statistical significance between thirty minutes of screen time before going to bed and sleep quality. Additionally we fail to reject the null hypothesis which suggests that there is no statistical significance between screen time thirty minutes before going to bed and dleep quality.
-
-This experiment was too small to demonstrate any statistically significant treatment effect.  It would be interesting to repeat this test with a much larger population.
+Through our findings and analysis of the data we fail to reject the null hypothesis.  This experiment was likely too small to demonstrate any statistically significant treatment effect.  It would be interesting to repeat this test with a much larger population.  It is also interesting that treatment increased hours slept, even when controlling for other covariates.  This study would be much more interesting if we could have tightly controlled the amount of time each subject spent in bed.
 
