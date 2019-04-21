@@ -39,7 +39,7 @@ _Does using electronic devices with a backlit screen thirty minutes prior to sle
 
 # Hypothesis
 
-We hypothesize that that use of an electronic device with a screen for at least thirty minutes prior to going to sleep degrades the overall sleep quality for that night. The null hypothesis would correspondingly say that there is no statistical significance between screen time thirty minutes before going to bed and sleep quality.
+We hypothesize that use of an electronic device with a screen for at least thirty minutes prior to going to sleep degrades the overall sleep quality for that night. The null hypothesis would correspondingly say that there is no statistical significance between screen time thirty minutes before going to bed and sleep quality.
 
 As a correlary, we investigate whether refraining from electronics usage thirty minutes prior to going to sleep improves sleep quality for that night.
 
