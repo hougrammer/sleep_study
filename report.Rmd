@@ -31,7 +31,7 @@ library(multiwayvcov)
 
 # Introduction
 
-The importance of good sleeping habits has been emphasized frequently in contemporary advice. One aspect of good sleep hygiene is the avoidance of any electronic devices with backlit screens prior to bed. Light from electronic devices can cause the brain to stay active as if it is a daytime thereby inhibiting the production of the sleep hormone 'melatonin'. In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed. Due to our limited expertise and resources for studying sleep science, we will perform the measurement using a mobile app.
+The importance of good sleeping habits is emphasized frequently in contemporary advice. One aspect of good sleep hygiene is avoidance of electronics with backlit screens prior to sleep.  Light from electronic devices can cause the brain to stay active as if it were daytime, inhibiting the production of the sleep hormone melatonin.  In this experiment, we seek a quantitative measure of sleep quality degradation as a result of screen-time before bed. Due to our limited expertise and resources for studying sleep science, we will perform the measurement using a mobile app rather than sophisticated instrumentation.
 
 # Research Question
 
@@ -51,18 +51,18 @@ The mobile app that will be used for the experiment is called [Sleep Cycle](www.
 knitr::include_graphics('img/example_night.PNG')
 ```
 
-One of the statistics is the "Sleep Quality" number, which is the principle outcome variable for this experiment.  According to the *Sleep Cycle* website, the following four factors go into calculating Sleep Quality:
+One of the statistics is "Sleep Quality", the principle outcome variable for this experiment.  According to the [Sleep Cycle](www.sleepcycle.com) website, the following four factors go into calculating Sleep Quality:
 
 1. Amount of time spent in bed.
 2. Amount of time spent in deep sleep.
 3. Consistency of the sleep.
 4. Amount of times where the app registered the person as fully awake.
 
-Of the four factors, users generally have direct control only over the first one. We did not control the amount of time that users spend in bed, but we did instruct subjects to try to sleep at regular hours every night. As will be discussed later, compliance is a major issue in an experiment of this sort. We felt that tightly controlling the amount of time in bed would exacerbate the problem. The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect. The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
+Of the four factors, users generally have direct control only over the first one.  In this experiment, we did not control the amount of time that users spend in bed but did instruct subjects to try to sleep at regular hours every night. As will be discussed later, compliance was a major issue in this experiment. We felt that tightly controlling the amount of time in bed would exacerbate the problem. The other three factors are hopefully affected by screen-time, allowing us to measure a treatment effect.  The app also records a "snore" and "steps walked" value, but we have doubts about the accuracy of these measures and will not use them in our analysis.
 
-The experiment took place over two weeks, from March 23 to April 5 of 2019. Saturday was chosen as the start day of the week because it was feared that instructions to change the sleeping habits in the middle of the week might be ignored. We recruited 35 people for the study using a Google survey (provided in the appendix), consisting of classmates, friends, and family. In addition to asking for contact and demographic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions also included workout habits and alcohol consumption. Prior to commencement of the experiment, subjects were not made aware of the fact that screen-time was the critical variable of interest.
+The experiment took place over two weeks, from March 23 to April 5 of 2019. Saturday was chosen as the start day of the week because it was feared that instructions to change the sleeping habits in the middle of the week might be ignored. We recruited 35 people for the study using a Google survey (provided in the appendix), consisting of classmates, friends, and family.  In addition to asking for contact and demographic information, the survey also inquired about general sleep habits such as bedtime and pre-sleep activities.  While the survey did ask about electronic usage, the questions also included ones about workout habits and caffeine consumption. That is to say, subjects were not made aware of the fact that screen-time was the critical variable of interest prior to commencement of the experiment.
 
-All communications to subjects occurred over email. Every person in the same experimental group received identical emails (see Appendix). When instructing subjects to use electronic devices prior to bed, we did not mandate any specific activity, as we felt it would increase non-compliance on an already-intrusive study. We only specified that users should use some sort of electronic device with a backlit screen for 30 minutes immediately before bedtime. Similarly, we did not ask subjects in the other group to perform anything in lieu of electronic usage. These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
+All communications to subjects occurred over email.  Every person in the same experimental group received identical emails (see Appendix). When instructing subjects to use electronic devices prior to bed, we did not mandate any specific activity, as we felt it would increase non-compliance on an already-intrusive study. We only specified that users should use some sort of electronic device with a backlit screen for 30 minutes immediately before bedtime. Similarly, we did not ask subjects in the other group to perform anything in lieu of electronic usage. These subjects were simply asked to refrain from using electronics with backlit screens 30 minutes before bedtime.
 
 Subjects were randomly assigned to two groups, with group 1 receiving treatment (screen-time before bed) during the first week and group 2 receiving control (no screen-time before bed). After the first week, subjects were instructed to swap to the opposite activity of their original assignment. This swapping design allows us to perform within-subject comparisons while also leaving time for treatment effects to manifest themselves. With the group that received treatment first, we are also able to perform some analysis on persistence effects. Note that subjects were not informed of the instruction swap ahead of time, so we do not expect any anticipation effects.
 
@@ -70,7 +70,7 @@ The nature of the experiment requires effort from subjects in both treatment and
 
 ## Experiment Deviations
 
-After the initial sign-up survey, we asked all respondents to begin using the app (from March 14 to March 22 in a normal way so that we can collect the baseline data. Further, the app requires a minimum usage of 5 days to calibrate the sleep quality number. Sleep habits during this baseline usage were not closely controlled or monitored, as each subject signed up for the experiment on different dates. However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export. At this time, we learned that Android users could not perform the export due to missing functionality in the app. As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
+After the initial sign-up survey, we asked all respondents to begin using the app.  The baseline time period, from March 14 to 22, was meant to allow users to acclimate to nightly app usage.  Further, the [Sleep Cycle](www.sleepcycle.com) website mentions that the app may take a few days to properly calibrate. Sleep habits during the baseline usage were not closely controlled or monitored, as each subject signed up for the experiment on different dates. However, we did ask for an export of this baseline data prior to starting the experiment, so that subjects had some awareness of the steps it takes to perform the export. At this time, we learned that Android users could not perform the export due to missing functionality in the app. As such, we asked Android users (4 out of the 38) to manually record the sleep times and quality from the app each day.
 
 After closing out the initially sign-up survey, we decided to include ourselves as well as subjects in the experiment. This was to slightly increase the number of subjects. Though we were not aware of our own randomization apriori, we obviously had more knowledge of the experiment than other subjects, so we will analyze our own data with special care.
 
@@ -179,7 +179,7 @@ $$
 \begin{aligned}
     quality &= \beta_0 + \beta_1 treat \\\\
     quality &= \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i \\\\
-    quality &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j \\
+    quality &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j
 \end{aligned}
 $$
 In model 1, we naively regress on just the treatment variable. This yields the 0.628 point effect that was already shown in Table \ref{tab:quality_by_treatment_tab}. However, we are not taking into the account that multiple entries in the dataset came from the same person.
@@ -247,7 +247,7 @@ $$
 \begin{aligned}
     hours &= \beta_0 + \beta_1 treat \\\\
     hours &= \beta_0 + \beta_1 treat + \sum_i \gamma_i id_i \\\\
-    hours &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j \\
+    hours &= \beta_0 + \beta_1 treat + \sum_j \delta_j x_j
 \end{aligned}
 $$
 
@@ -280,7 +280,7 @@ stargazer(
 
 ### Bed Time
 
-Figure \ref{fig:bed_time_fig} shows a finding that maybe interesting. During baseline collection, it appears that the subjects slept slightly later than during the experiment. Since we obviously cannot observe other people who did not participate in the experiment, we refrain from drawing any causal conclusions. In any case, it is apparent that the actual treatment had little effect on bed time.
+Figure \ref{fig:bed_time_fig} shows a finding that maybe interesting. During baseline collection, it appears that the subjects slept slightly later than during the experiment. Since we obviously cannot observe other people who did not participate in the experiment, we refrain from drawing any causal conclusions. In any case, it is apparent that the actual treatment during the experiment had little effect on bed time.
 
 ```{r bed_time_fig, fig.cap='\\label{fig:bed_time_fig} Bed time by treatment'}
 df2 = df %>%
@@ -315,7 +315,9 @@ stargazer(
 )
 ```
 
-## Non-compliance
+# Challenges
+
+Throughout the course of this experiment we encountered challenges both expected and unexpected. We had hoped that incentivizing participants with a $10 gift card would help recruitment but it did not. Right before starting the experiment we had some participants dropout resulting in an even smaller group for our experiment. It would be a good idea to invest some time in understanding the best way to recruit commited participants. 
 
 ```{r days_used, fig.cap='\\label{fig:days_used} Number of nights of data submitted by each participant'}
 df2 = df[treat == 0 | treat == 1, .N, by = id]
@@ -327,21 +329,17 @@ ggplot(df2, aes(id, N)) +
 
 Non-compliance was a major issue in this experiment. Beyond not following our instructions on electronics usage, many subjects simply did not use the app. Figure \ref{fig:days_used} shows the number of nights of data that each subject actually submitted. The experiment took place over two weeks and ideally we would have received 14 nights of data from each person. Clearly this was not the case. The mean number of nights submitted was just 11.6 days, with one participant only using the app for 2 out of the 14 nights as he had a baby ahead of time. As an aside, one subject with 15 nights of data used the app twice on one night. The subject went to sleep, woke up, and then went to sleep again.  
 
-# Challenges
-
-Throughout the course of this experiment we encountered challenges both expected and unexpected. We had hoped that incentivizing participants with a $10 gift card would help recruitment but it did not. Right before starting the experiment we had some participants dropout resulting in an even smaller group for our experiment. It would be a good idea to invest some time in understanding the best way to recruit commited participants. 
-
-Another fact that we were made painfully aware of is that people do what they want and they do not like being told what to do. The figure below shows self-reported anonymized non-compliance from the participants:
+In addition, we sent out a survey after the experiment, asking subjects to anonymously give us feed back about how many nights they actually complied with our experiment.  That is, we asked how many nights during treatment were the subjects actually using electronics for 30 minutes before bed; during control, avoiding electronics 30 minutes before bed.
 
 ```{r noncompliance, out.width='100%', fig.align='center', fig.cap='Experiment Non-compliance'}
 knitr::include_graphics('img/compliance.PNG')
 ```
 
-We see from Figure \ref{fig:noncompliance} that we had two participants that were not able to follow the treatment for all seven days. Majority of the participants missed around one to two days. Reflecting on these numbers from an experiment point of view leads us to few ways the experiment could have been conducted better to reduce non-compliance. We could have sent nightly reminders to participants reminding them to follow treatment and control. However, how would this apply across participants who may have different bedtimes. We could have filtered users with abnormal sleep cycles (i.e. medical residents) out of the survey. If this experiment was repeated special attention needs to be paid to whom we are recruiting.
+Figure \ref{fig:noncompliance} shows the results of that survey.  Two participants that were not able to follow the treatment for all seven days. The majority of participants missed around one to two days.  Reflecting on these numbers lends insight on some potential methods for reducing non-compliance.  Nightly reminders could have been beneficial, but it is unclear how to apply this accross subjects with different bedtimes.
 
-Towards the end of the experiment questions also came up regarding our decision to use the _Sleep Cycle_ app. When it came to analyze the data we saw that the app reports higher sleep quality numbers proportional to time spent in bed. Additionally, the Android version of the app was lacking the ability to export data and had to be reported manually from the participants. The _Sleep Cycle_ app uses audio analysis to discern and generate a sleep quality number. There is no way to no way to know for sure if this is the best method to measure sleep quality. Another alternative is to use the product created by _Withings_: https://www.withings.com/us/en/sleep#.
+There are also questions regarding the _Sleep Cycle_ app as measurement device.  As shown above, there is an extremely high correlation between hours slept and sleep quality, making the latter's informativeness suspect.  Additionally, the Android version of the app lacks the ability to export data and some users had to manually record data. The _Sleep Cycle_ app uses audio analysis to discern and generate a sleep quality number. It is unclear if this measurement method is accurate. Another alternative is to use the product created by _Withings_: https://www.withings.com/us/en/sleep#.
 
-There is a strong possibility that our experiment suffered from the spillover effect. A decent amount of our participants were recruited from word of mouth or relatives of those conducting the experiment. No explicit instructions were sent to individuals to not share whether they were assigned to treatment (screen time) or control (no screen time). There is no way to know for sure but a bigger pool of participants and more explicit instructions would greatly reduce the risk. 
+There is also possibility of spillover in the experiment.  A significant number of participants were recruited by word of mouth from relatives of those conducting the experiment.  No explicit instructions were sent to individuals to not share whether they were assigned to treatment (screen time) or control (no screen time).
 
 # Conclusion
 
